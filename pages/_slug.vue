@@ -7,7 +7,7 @@
         :alt="post.fields.title" 
       />
       <p>{{ post.fields.title }}</p>
-      <div v-html="$md.render(post.fields.body)">
+      <div class="content" v-html="$md.render(post.fields.body)">
       </div>
     </div>
   </section>

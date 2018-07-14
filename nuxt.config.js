@@ -19,7 +19,14 @@ module.exports = {
           "프론트엔드 개발지식 나눔 블로그 | javascript, vue, react, es6, webpack, jquery"
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      {
+        rel: "stylesheet",
+        href:
+          "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"
+      }
+    ]
   },
   /*
   ** Customize the progress bar color
