@@ -1,7 +1,7 @@
 <template>
-  <section>
+  <section class="has-text-centered">
     <h2 v-for="(item, index) in items" :key="index">
-      <nuxt-link :to="item.fields.slug">{{ item.fields.title }}</nuxt-link>
+      <nuxt-link :to="`/blog/${item.fields.slug}`">{{ item.fields.title }}</nuxt-link>
     </h2>
   </section>
 </template>
