@@ -5,11 +5,16 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: "feruden-blog",
+    title: "FERuden",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "Nuxt.js project" }
+      {
+        hid: "description",
+        name: "description",
+        content:
+          "프론트엔드 개발지식 나눔 블로그 | javascript, vue, react, es6, webpack, jquery"
+      }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
@@ -36,7 +41,7 @@ module.exports = {
     }
   },
   plugins: ["~plugins/contentful"],
-  modules: ["@nuxtjs/dotenv", "@nuxtjs/markdownit"],
+  modules: ["@nuxtjs/dotenv", "@nuxtjs/markdownit", "@nuxtjs/pwa"],
   markdownit: {
     injected: true
   },
