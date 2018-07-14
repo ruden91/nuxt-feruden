@@ -36,7 +36,10 @@ export default {
     return {
       title: this.post.fields.title,
       meta: [
-        { hid: 'description', name: 'description', content: this.post.fields.description }
+        { hid: 'description', name: 'description', content: this.post.fields.description },
+        { hid: 'og:title', property: 'og:title', content: this.post.fields.title},
+        { hid: 'og:description', property: 'og:description', content: this.post.fields.description},
+        { hid:'og:image', property: 'og:image', content: this.post.fields.heroImage.fields.file.url},        
       ]      
     }
   },   
