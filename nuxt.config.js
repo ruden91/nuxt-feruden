@@ -43,7 +43,7 @@ module.exports = {
       }
     }
   },
-  plugins: ["~plugins/contentful"],
+  plugins: ["~plugins/contentful", { src: "~plugins/ga.js", ssr: false }],
   modules: ["@nuxtjs/dotenv", "@nuxtjs/markdownit", "@nuxtjs/pwa"],
   markdownit: {
     injected: true
