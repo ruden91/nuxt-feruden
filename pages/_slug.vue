@@ -2,7 +2,10 @@
   <section>
     <nuxt-link to="/">back to home</nuxt-link>
     <div>
-      <img :src="image" :alt="post.fields.title" />
+      <img 
+        :src="post.fields.heroImage.fields.file.url"
+        :alt="post.fields.title" 
+      />
       <p>{{ post.fields.title }}</p>
       <div v-html="$md.render(post.fields.body)">
       </div>
@@ -27,8 +30,7 @@ export default {
     });
     
     return {
-      post: items[0],
-      image: `https:${items[0].fields.heroImage.fields.file.url}`
+      post: items[0]
     }
   }  
 }
