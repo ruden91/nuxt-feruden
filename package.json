@@ -1,8 +1,8 @@
 {
-  "name": "feruden-blog",
+  "name": "FERuden",
   "version": "1.0.0",
-  "description": "Nuxt.js project",
-  "author": "ruden <ruden91@mycelebs.com>",
+  "description": "프론트엔드 개발지식 나눔 블로그 | javascript, vue, react, es6, webpack, jquery",
+  "author": "ruden <ruden91@naver.com>",
   "private": true,
   "scripts": {
     "dev": "nuxt",

@@ -12,3 +12,4 @@ dist
 
 #private
 .env
+public
