@@ -64,7 +64,7 @@ module.exports = {
         .then(entries => {
           return entries.items.map(entry => {
             return {
-              route: entry.fields.slug,
+              route: `/blog/${entry.fields.slug}`,
               payload: entry
             };
           });
