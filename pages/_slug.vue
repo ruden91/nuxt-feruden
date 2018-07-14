@@ -16,7 +16,6 @@
 <script>
 import client from '~/plugins/contentful'
 export default {
-  name: 'post',
   async asyncData({ params, errors, payload }) {
     if (payload) {
       return {
@@ -32,7 +31,15 @@ export default {
     return {
       post: items[0]
     }
-  }  
+  },
+  head() {
+    return {
+      title: this.post.fields.title,
+      meta: [
+        { hid: 'description', name: 'description', content: this.post.fields.description }
+      ]      
+    }
+  },   
 }
 </script>
   

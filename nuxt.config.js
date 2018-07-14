@@ -5,6 +5,9 @@ module.exports = {
   ** Headers of the page
   */
   head: {
+    htmlAttrs: {
+      lang: "ko"
+    },
     title: "FERuden",
     meta: [
       { charset: "utf-8" },
@@ -62,3 +65,4 @@ module.exports = {
     }
   }
 };
+// "@nuxtjs/pwa"
