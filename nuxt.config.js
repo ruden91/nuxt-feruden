@@ -11,6 +11,10 @@ module.exports = {
     },
     title: "FERuden",
     meta: [
+      {
+        name: "google-site-verification",
+        content: "DFN8ft01giCHJhFJnziWud4POhjvFAcc1NkeT7cbBjE"
+      },
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
