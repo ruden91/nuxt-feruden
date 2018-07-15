@@ -13,6 +13,7 @@
                 <p class="main-card__title">{{ item.fields.title }}</p>
                 <span class="tag">{{ item.fields.categories[0] }}</span>
                 <p class="main-card__description">{{ item.fields.description}}</p>
+                <time>{{ transformDateToMomentDate(item.fields.publishDate)}}</time>
               </div>
             </div>
             </nuxt-link>
@@ -24,6 +25,8 @@
 </template>
   
 <script>
+import moment from 'moment';
+import 'moment/locale/ko';
 import client from '~/plugins/contentful'
 export default {
   name: 'index',
@@ -35,6 +38,12 @@ export default {
     console.log(items[0]);
     return {
       items
+    }
+  },
+  methods: {
+    transformDateToMomentDate(date) {
+      console.log(date);
+      return moment(date).fromNow();
     }
   }
 }
@@ -58,6 +67,12 @@ export default {
   -webkit-line-clamp: 2; /* 라인수 */
   -webkit-box-orient: vertical;
   word-wrap: break-word;
+}
+.main-card time {
+  padding-top: 5px;
+  float: right;
+  font-size: 10px;
+  color: #7a7a7a;
 }
 .main-card img {
   border: 1px solid rgba(0, 0, 0, 0.05);
