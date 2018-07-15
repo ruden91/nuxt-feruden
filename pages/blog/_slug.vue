@@ -1,6 +1,5 @@
 <template>
   <section>
-    <nuxt-link to="/">back to home</nuxt-link>
     <div>
       <img 
         :src="post.fields.heroImage.fields.file.url"
@@ -12,11 +11,10 @@
     </div>
     <div class="comments">
       <vue-disqus 
-        shortname="https-ruden91-github-io"
-        :identifier="post.id" 
+        :shortname="shortname"
+        :identifier="post.sys.id" 
+        :url="`${baseUrl}/blog/${post.fields.slug}`"
       ></vue-disqus>
-        <!-- :identifier="page_id" 
-      url="http://example.com/path"       -->
     </div>    
   </section>
 </template>
@@ -24,6 +22,12 @@
 <script>
 import client from '~/plugins/contentful'
 export default {
+  data() {
+    return {
+      shortname: 'https-ruden91-github-io',
+      baseUrl: 'https://loving-wright-d0eedb.netlify.com'
+    }
+  },
   async asyncData({ params, errors, payload }) {
     if (payload) {
       return {
