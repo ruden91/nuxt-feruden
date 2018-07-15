@@ -59,7 +59,7 @@ module.exports = {
     // { src: "~plugins/ga.js", ssr: false },
     "~plugins/disqus"
   ],
-  modules: ["@nuxtjs/dotenv", "@nuxtjs/markdownit"],
+  modules: ["@nuxtjs/dotenv", "@nuxtjs/markdownit", "@nuxtjs/pwa"],
   markdownit: {
     injected: true,
     use: ["markdown-it-highlightjs"]
@@ -81,4 +81,3 @@ module.exports = {
     }
   }
 };
-// "@nuxtjs/pwa"
