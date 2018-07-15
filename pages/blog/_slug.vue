@@ -59,4 +59,8 @@ export default {
 </script>
   
 <style>
+.content pre {
+  padding: 0;
+  background-color: transparent;
+}
 </style>

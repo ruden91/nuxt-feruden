@@ -29,6 +29,9 @@ module.exports = {
       }
     ]
   },
+  css: [
+    { src: "~/node_modules/highlight.js/styles/atom-one-dark.css", lang: "css" }
+  ],
   /*
   ** Customize the progress bar color
   */
@@ -58,7 +61,8 @@ module.exports = {
   ],
   modules: ["@nuxtjs/dotenv", "@nuxtjs/markdownit"],
   markdownit: {
-    injected: true
+    injected: true,
+    use: ["markdown-it-highlightjs"]
   },
   generate: {
     routes() {
