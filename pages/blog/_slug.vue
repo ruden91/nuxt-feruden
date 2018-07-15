@@ -133,7 +133,7 @@ export default {
   text-align: center;
   color: #fbfbfb;
   font-weight: 300;
-  font-size: 4vw;
+  font-size: 3.5vw;
   text-shadow: 2px 2px 2px #111;
   position: absolute;
   left: 0;

@@ -24,10 +24,7 @@
       id="navMenu"
     >
     <div class="navbar-start">
-      <!-- navbar items -->
-      <a class="navbar-item">
-        Home
-      </a>        
+      <!-- navbar items -->       
     </div>
 
     <div class="navbar-end">
@@ -51,3 +48,8 @@ export default {
   }  
 }
 </script>
+<style scoped>
+.navbar {
+  border-bottom: 1px solid #ddd;
+}
+</style>

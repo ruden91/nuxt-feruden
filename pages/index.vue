@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="container">
+    <div class="container is-fluid">
       <div class="columns is-2 is-multiline is-mobile">
         <div class="column is-one-third" v-for="(item, index) in items" :key="index">
           <div class="main-card">
@@ -35,14 +35,12 @@ export default {
       content_type: 'blogPost',
       order: '-sys.createdAt'
     });
-    console.log(items[0]);
     return {
       items
     }
   },
   methods: {
     transformDateToMomentDate(date) {
-      console.log(date);
       return moment(date).fromNow();
     }
   }
@@ -50,6 +48,11 @@ export default {
 </script>
   
 <style scoped>
+section {
+  margin-top: 20px;
+  padding: 0 15px;
+}
+
 .main-card {
 }
 .main-card__content {
@@ -85,11 +88,7 @@ export default {
 .main-card .main-card__title {
   color: #363636;
   font-size: 14px;
-  line-height: 32px;
-  padding-right: 80px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  padding-right: 45px;
 }
 .main-card .card-image {
 }
