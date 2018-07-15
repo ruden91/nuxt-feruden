@@ -39,7 +39,7 @@ export default {
       content_type: 'blogPost',
       'fields.slug': params.slug
     });
-    console.log(items[0]);
+    
     return {
       post: items[0]
     }

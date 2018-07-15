@@ -21,7 +21,8 @@ export default {
   name: 'index',
   async asyncData() {
     let { items } = await client.getEntries({
-      content_type: 'blogPost'
+      content_type: 'blogPost',
+      order: '-sys.createdAt'
     });
     return {
       items
