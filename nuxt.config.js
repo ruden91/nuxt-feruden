@@ -68,7 +68,8 @@ module.exports = {
     "@nuxtjs/dotenv",
     "@nuxtjs/markdownit",
     "@nuxtjs/pwa",
-    "@nuxtjs/sitemap"
+    "@nuxtjs/sitemap",
+    "@nuxtjs/google-adsense"
   ],
   markdownit: {
     injected: true,
@@ -86,6 +87,9 @@ module.exports = {
   },
   manifest: {
     lang: "ko"
+  },
+  "google-adsense": {
+    id: "ca-pub-2137294472379721"
   },
   sitemap: {
     path: "/sitemap.xml",
