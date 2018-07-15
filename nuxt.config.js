@@ -56,7 +56,7 @@ module.exports = {
   },
   plugins: [
     "~plugins/contentful",
-    { src: "~plugins/ga.js", ssr: false },
+    // { src: "~plugins/ga.js", ssr: false },
     "~/plugins/disqus"
   ],
   modules: ["@nuxtjs/dotenv", "@nuxtjs/markdownit"],
