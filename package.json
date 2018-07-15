@@ -17,7 +17,9 @@
     "@nuxtjs/markdownit": "^1.2.1",
     "@nuxtjs/pwa": "^2.0.8",
     "contentful": "^6.1.1",
-    "nuxt": "^1.0.0"
+    "nuxt": "^1.0.0",
+    "vue-masonry": "^0.11.4",
+    "vue-no-ssr": "^0.2.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

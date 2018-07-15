@@ -1,6 +1,7 @@
 <template>
-  <section class="has-text-centered">
+  <section>
     <h2 v-for="(item, index) in items" :key="index">
+      <img :src="item.fields.heroImage.fields.file.url" />
       <nuxt-link :to="`/blog/${item.fields.slug}`">{{ item.fields.title }}</nuxt-link>
     </h2>
   </section>
