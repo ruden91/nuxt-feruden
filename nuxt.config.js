@@ -56,7 +56,7 @@ module.exports = {
     { src: "~plugins/ga.js", ssr: false },
     "~/plugins/disqus"
   ],
-  modules: ["@nuxtjs/dotenv", "@nuxtjs/markdownit", "@nuxtjs/pwa"],
+  modules: ["@nuxtjs/dotenv", "@nuxtjs/markdownit"],
   markdownit: {
     injected: true
   },
