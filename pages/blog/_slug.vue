@@ -1,10 +1,12 @@
 <template>
   <section>
-    <div>
+    <div class="container is-fluid bg-container">
       <img 
         :src="post.fields.heroImage.fields.file.url"
         :alt="post.fields.title" 
-      />
+      />      
+    </div>
+    <div class="container">
       <p>{{ post.fields.title }}</p>
       <div class="content" v-html="$md.render(post.fields.body)">
       </div>
@@ -59,6 +61,14 @@ export default {
 </script>
   
 <style>
+.bg-container {
+  height: calc(100vh - 52px);
+}
+.bg-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .content pre {
   padding: 0;
   background-color: transparent;

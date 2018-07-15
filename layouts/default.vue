@@ -1,9 +1,7 @@
 <template>
   <div>
     <GlobalNav />       
-    <div class="container">
-      <nuxt/>
-    </div>
+    <nuxt/>
     <Footer />
   </div>
 </template>
