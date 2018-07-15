@@ -10,6 +10,14 @@
       <div class="content" v-html="$md.render(post.fields.body)">
       </div>
     </div>
+    <div class="comments">
+      <vue-disqus 
+        shortname="https-ruden91-github-io"
+        :identifier="post.id" 
+      ></vue-disqus>
+        <!-- :identifier="page_id" 
+      url="http://example.com/path"       -->
+    </div>    
   </section>
 </template>
   
@@ -27,7 +35,7 @@ export default {
       content_type: 'blogPost',
       'fields.slug': params.slug
     });
-    
+    console.log(items[0]);
     return {
       post: items[0]
     }

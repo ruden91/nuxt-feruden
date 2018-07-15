@@ -6,7 +6,8 @@ module.exports = {
   */
   head: {
     htmlAttrs: {
-      lang: "ko"
+      lang: "ko",
+      class: "has-navbar-fixed-top"
     },
     title: "FERuden",
     meta: [
@@ -50,7 +51,11 @@ module.exports = {
       }
     }
   },
-  plugins: ["~plugins/contentful", { src: "~plugins/ga.js", ssr: false }],
+  plugins: [
+    "~plugins/contentful",
+    { src: "~plugins/ga.js", ssr: false },
+    "~/plugins/disqus"
+  ],
   modules: ["@nuxtjs/dotenv", "@nuxtjs/markdownit", "@nuxtjs/pwa"],
   markdownit: {
     injected: true
