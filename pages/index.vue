@@ -88,7 +88,7 @@ section {
 .main-card .main-card__title {
   color: #363636;
   font-size: 14px;
-  padding-right: 45px;
+  padding-right: 60px;
 }
 .main-card .card-image {
 }

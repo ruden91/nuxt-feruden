@@ -84,6 +84,9 @@ module.exports = {
       }));
     }
   },
+  manifest: {
+    lang: "ko"
+  },
   sitemap: {
     path: "/sitemap.xml",
     generate: true,
