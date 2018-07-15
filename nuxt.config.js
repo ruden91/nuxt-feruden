@@ -86,6 +86,7 @@ module.exports = {
   },
   sitemap: {
     path: "/sitemap.xml",
+    generate: true,
     async routes() {
       const { items } = await client.getEntries({ content_type: "blogPost" });
       return items.map(item => `/blog/${item.fields.slug}`);
