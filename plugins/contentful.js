@@ -1,5 +1,4 @@
 const contentful = require("contentful");
-console.log(process.env);
 const client = contentful.createClient({
   space: "hu4faubeotg0",
   accessToken:

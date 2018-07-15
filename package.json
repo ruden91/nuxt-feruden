@@ -16,6 +16,7 @@
     "@nuxtjs/dotenv": "^1.1.1",
     "@nuxtjs/markdownit": "^1.2.1",
     "@nuxtjs/pwa": "^2.0.8",
+    "@nuxtjs/sitemap": "^0.1.1",
     "contentful": "^6.1.1",
     "markdown-it-highlightjs": "^3.0.0",
     "moment": "^2.22.2",

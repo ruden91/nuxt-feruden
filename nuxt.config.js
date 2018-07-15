@@ -1,5 +1,6 @@
 require("dotenv").config();
 const client = require("./plugins/contentful");
+
 module.exports = {
   /*
   ** Headers of the page
@@ -63,25 +64,31 @@ module.exports = {
     { src: "~plugins/ga.js", ssr: false },
     "~/plugins/disqus"
   ],
-  modules: ["@nuxtjs/dotenv", "@nuxtjs/markdownit", "@nuxtjs/pwa"],
+  modules: [
+    "@nuxtjs/dotenv",
+    "@nuxtjs/markdownit",
+    "@nuxtjs/pwa",
+    "@nuxtjs/sitemap"
+  ],
   markdownit: {
     injected: true,
     use: ["markdown-it-highlightjs"]
   },
   generate: {
-    routes() {
-      return client
-        .getEntries({
-          content_type: "blogPost"
-        })
-        .then(entries => {
-          return entries.items.map(entry => {
-            return {
-              route: `/blog/${entry.fields.slug}`,
-              payload: entry
-            };
-          });
-        });
+    async routes() {
+      const { items } = await client.getEntries({ content_type: "blogPost" });
+
+      return items.map(item => ({
+        route: `/blog/${item.fields.slug}`,
+        payload: item
+      }));
+    }
+  },
+  sitemap: {
+    path: "/sitemap.xml",
+    async routes() {
+      const { items } = await client.getEntries({ content_type: "blogPost" });
+      return items.map(item => `/blog/${item.fields.slug}`);
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="container is-fluid">
+    <div class="container">
       <div class="columns is-2 is-multiline is-mobile">
         <div class="column is-one-third" v-for="(item, index) in items" :key="index">
           <div class="main-card">

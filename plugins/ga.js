@@ -33,7 +33,6 @@ export default ({ app }) => {
   ** Every time the route changes (fired on initialization too)
   */
   app.router.afterEach((to, from) => {
-    console.log(to.fullPath);
     /*
     ** We tell Google Analytics to add a `pageview`
     */
