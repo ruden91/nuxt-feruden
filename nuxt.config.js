@@ -87,6 +87,8 @@ module.exports = {
   sitemap: {
     path: "/sitemap.xml",
     generate: true,
+    hostname: "https://loving-wright-d0eedb.netlify.com",
+    gzip: true,
     async routes() {
       const { items } = await client.getEntries({ content_type: "blogPost" });
       return items.map(item => `/blog/${item.fields.slug}`);
