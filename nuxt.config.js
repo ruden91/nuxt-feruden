@@ -88,6 +88,9 @@ module.exports = {
   manifest: {
     lang: "ko"
   },
+  icon: {
+    iconSrc: "~static/icon.png"
+  },
   "google-adsense": {
     id: "ca-pub-2137294472379721"
   },

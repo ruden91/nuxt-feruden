@@ -35,6 +35,7 @@ export default {
       content_type: 'blogPost',
       order: '-sys.createdAt'
     });
+    console.log(items);
     return {
       items
     }
