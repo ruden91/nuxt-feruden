@@ -105,4 +105,16 @@ section {
   padding-right: 0.7em;
   padding-bottom: 1px;
 }
+
+@media all and (max-width: 1024px) {
+  .is-one-third {
+    width: 50% !important;
+  }
+}
+
+@media all and (max-width: 499px) {
+  .is-one-third {
+    width: 100% !important;
+  }
+}
 </style>
