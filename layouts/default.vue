@@ -16,7 +16,6 @@ export default {
   head() {
     let baseUrl = 'https://loving-wright-d0eedb.netlify.com';
     let canonical = `${baseUrl}${this.$route.path}`;
-    console.log(canonical);
     return {
       link: [{ rel: 'canonical', href: canonical }]
     }
