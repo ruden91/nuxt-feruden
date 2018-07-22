@@ -23,6 +23,10 @@ module.exports = {
         name: "description",
         content:
           "프론트엔드 개발지식 나눔 블로그 | javascript, vue, react, es6, webpack, jquery"
+      },
+      {
+        property: "og:image",
+        content: "https://loving-wright-d0eedb.netlify.com/main2.png"
       }
     ],
     link: [
