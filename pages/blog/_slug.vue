@@ -72,6 +72,8 @@ export default {
         { hid: 'description', name: 'description', content: this.post.fields.description },
         { hid: 'og:title', property: 'og:title', content: this.post.fields.title},
         { hid: 'og:description', property: 'og:description', content: this.post.fields.description},
+        { hid: 'og:type', property: 'og:type', content: 'article'},
+        { hid: 'og:locale', property: 'og:locale', content: 'ko'},
         { hid: 'og:url', property: 'og:url', content: `https://loving-wright-d0eedb.netlify.com/blog/${this.post.fields.slug}`},
         { hid:'og:image', property: 'og:image', content: this.post.fields.heroImage.fields.file.url},        
       ]      
