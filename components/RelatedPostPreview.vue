@@ -42,7 +42,14 @@ ul li {
   padding: 10px;
 }
 ul li img {
+  width: 100%;
   height: 200px;
   object-fit: cover;
+}
+
+@media all and (max-width: 631px) {
+  ul li {
+    width: 100%;
+  }
 }
 </style>
