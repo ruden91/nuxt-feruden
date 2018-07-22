@@ -11,7 +11,7 @@
         <img src="~assets/images/down-arrow.png" />
       </div>      
     </div>
-    <div class="container">
+    <div class="container container--comments">
       <div class="content" v-html="$md.render(post.fields.body)">
       </div>
       <div class="comments">
@@ -21,15 +21,21 @@
           :url="`${baseUrl}/blog/${post.fields.slug}`"
         ></vue-disqus>
       </div>      
-    </div>    
+    </div>
+    <RelatedPostPreview :items="relatedPosts" />    
   </section>
 </template>
   
 <script>
+import RelatedPostPreview from '~/components/RelatedPostPreview.vue';
 import moment from 'moment';
 import 'moment/locale/ko';
-import client from '~/plugins/contentful'
+import client from '~/plugins/contentful';
+import { sampleSize } from 'lodash';
 export default {
+  components: {
+    RelatedPostPreview
+  },
   data() {
     return {
       shortname: 'https-ruden91-github-io',
@@ -44,12 +50,19 @@ export default {
     }
 
     let { items } = await client.getEntries({
-      content_type: 'blogPost',
-      'fields.slug': params.slug
+      content_type: 'blogPost'
     });
+    let post = items.filter(item => item.fields.slug === params.slug)[0];
+    let relatedPosts = items.filter(item => (item.fields.categories[0] === post.fields.categories[0]) && post.sys.id !== item.sys.id);
+
+    if (relatedPosts.length === 0) {
+      relatedPosts = items.filter(item => post.sys.id !== item.sys.id);
+    }
+    relatedPosts = sampleSize(relatedPosts, 3);
     
     return {
-      post: items[0]
+      post,
+      relatedPosts
     }
   },
   head() {
@@ -59,6 +72,7 @@ export default {
         { hid: 'description', name: 'description', content: this.post.fields.description },
         { hid: 'og:title', property: 'og:title', content: this.post.fields.title},
         { hid: 'og:description', property: 'og:description', content: this.post.fields.description},
+        { hid: 'og:url', property: 'og:url', content: `https://loving-wright-d0eedb.netlify.com/blog/${this.post.fields.slug}`},
         { hid:'og:image', property: 'og:image', content: this.post.fields.heroImage.fields.file.url},        
       ]      
     }
@@ -157,5 +171,8 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.container--comments {
+  min-height: 250px;
 }
 </style>
