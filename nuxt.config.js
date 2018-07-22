@@ -25,6 +25,7 @@ module.exports = {
           "프론트엔드 개발지식 나눔 블로그 | javascript, vue, react, es6, webpack, jquery"
       },
       {
+        hid: "og:image",
         property: "og:image",
         content: "https://loving-wright-d0eedb.netlify.com/main2.png"
       }
