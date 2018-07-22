@@ -92,7 +92,8 @@ module.exports = {
     iconSrc: "~static/icon.png"
   },
   "google-adsense": {
-    id: "ca-pub-2137294472379721"
+    id: "ca-pub-2137294472379721",
+    pageLevelAds: true
   },
   sitemap: {
     path: "/sitemap.xml",
