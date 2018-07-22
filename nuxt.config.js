@@ -10,7 +10,7 @@ module.exports = {
       lang: "ko",
       class: "has-navbar-fixed-top"
     },
-    title: "FERuden",
+    title: "FERuden | 프론트엔드 개발지식 공유 블로그",
     meta: [
       {
         name: "google-site-verification",
@@ -87,9 +87,6 @@ module.exports = {
   },
   manifest: {
     lang: "ko"
-  },
-  icon: {
-    iconSrc: "~static/icon.png"
   },
   "google-adsense": {
     id: "ca-pub-2137294472379721",
