@@ -11,7 +11,9 @@
               </figure>
               <div class="main-card__content">
                 <p class="main-card__title">{{ item.fields.title }}</p>
-                <span class="tag">{{ item.fields.categories[0] }}</span>
+                <nuxt-link :to="`/tags/${item.fields.categories[0]}`">
+                  <span class="tag">{{ item.fields.categories[0] }}</span>
+                </nuxt-link>
                 <p class="main-card__description">{{ item.fields.description}}</p>
                 <time>{{ transformDateToMomentDate(item.fields.publishDate)}}</time>
               </div>
