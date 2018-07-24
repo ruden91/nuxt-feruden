@@ -14,6 +14,17 @@
     <div class="container container--comments">
       <div class="content" v-html="$md.render(post.fields.body)">
       </div>
+      <div class="tags">
+            <span 
+              v-for="(tag, index) in post.fields.tags" 
+              :key="index" 
+              class="tag is-link"
+            >
+              <nuxt-link :to="`/tags/${tag}`">
+                {{ tag }}
+              </nuxt-link>
+            </span>          
+      </div>
       <div class="comments">
         <vue-disqus 
           :shortname="shortname"
@@ -95,6 +106,9 @@ export default {
 </style>
 
 <style scoped>
+.tag a {
+  color: #fff;
+}
 @keyframes bounce {
   0%,
   20%,
