@@ -29,6 +29,9 @@
 
     <div class="navbar-end">
       <!-- navbar items -->
+        <a class="navbar-item" @click.prevent="onHandleFashSearchModal">
+          빠른검색
+        </a>      
     </div>        
     </div>      
   </nav>  
@@ -36,6 +39,7 @@
 <script>
 export default {
   name: 'GlobalNav',
+  props: ['onHandleFashSearchModal'],
   data() {
     return {
       toggleNav: false

@@ -33,6 +33,7 @@ import 'moment/locale/ko';
 import client from '~/plugins/contentful';
 import { sampleSize } from 'lodash';
 export default {
+  scrollToTop: true,
   components: {
     RelatedPostPreview
   },
@@ -70,7 +71,7 @@ export default {
       title: this.post.fields.title,
       meta: [
         { hid: 'description', name: 'description', content: this.post.fields.description },
-        { hid: 'og:title', property: 'og:title', content: this.post.fields.title},
+        { hid: 'og:title', property: 'og:title', content: `FERuden | ${this.post.fields.title}`},
         { hid: 'og:description', property: 'og:description', content: this.post.fields.description},
         { hid: 'og:type', property: 'og:type', content: 'article'},
         { hid: 'og:locale', property: 'og:locale', content: 'ko'},

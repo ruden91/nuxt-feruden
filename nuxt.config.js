@@ -1,3 +1,4 @@
+const _ = require("lodash");
 require("dotenv").config();
 const client = require("./plugins/contentful");
 
@@ -83,11 +84,16 @@ module.exports = {
   generate: {
     async routes() {
       const { items } = await client.getEntries({ content_type: "blogPost" });
-
-      return items.map(item => ({
+      const tags = _.uniq(_.flattenDeep(items.map(item => item.fields.tags)));
+      const blogPosts = items.map(item => ({
         route: `/blog/${item.fields.slug}`,
         payload: item
       }));
+      const tagsPosts = tags.map(item => ({
+        route: `/tags/${item}`
+      }));
+      console.log(tagsPosts);
+      return [...blogPosts, ...tagsPosts];
     }
   },
   manifest: {
