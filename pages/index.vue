@@ -1,19 +1,17 @@
 <template>
   <section>
     <div class="container">
-      <div class="columns is-2 is-multiline is-mobile">
+      <div class="columns is-multiline">
         <div class="column is-one-third" v-for="(item, index) in items" :key="index">
           <div class="main-card">
             <nuxt-link :to="`/blog/${item.fields.slug}`">
             <div class="card-image">
-              <figure>
+              <figure class="image is-5by3">
                 <img :src="item.fields.heroImage.fields.file.url" />
               </figure>
               <div class="main-card__content">
                 <p class="main-card__title">{{ item.fields.title }}</p>
-                <nuxt-link :to="`/tags/${item.fields.categories[0]}`">
-                  <span class="tag">{{ item.fields.categories[0] }}</span>
-                </nuxt-link>
+                <span class="tag">{{ item.fields.categories[0] }}</span>
                 <p class="main-card__description">{{ item.fields.description}}</p>
                 <time>{{ transformDateToMomentDate(item.fields.publishDate)}}</time>
               </div>
@@ -58,6 +56,7 @@ section {
 .main-card {
 }
 .main-card__content {
+  margin-top: 10px;
   position: relative;
   padding: 0 10px;
 }
@@ -82,10 +81,6 @@ section {
 .main-card img {
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 5px;
-  overflow: hidden;
-  width: 100%;
-  height: 225px;
-  object-fit: cover;
 }
 .main-card .main-card__title {
   color: #363636;
@@ -108,7 +103,7 @@ section {
   padding-bottom: 1px;
 }
 
-@media all and (max-width: 1024px) {
+/* @media all and (max-width: 1024px) {
   .is-one-third {
     width: 50% !important;
   }
@@ -118,5 +113,5 @@ section {
   .is-one-third {
     width: 100% !important;
   }
-}
+} */
 </style>

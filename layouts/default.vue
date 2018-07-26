@@ -3,12 +3,15 @@
     <GlobalNav :onHandleFashSearchModal="handleFashSearchModal" />       
     <nuxt/>
     <Footer />
-    <div class="modal" :class="{'is-active': isActivedFashSearch}">
+    <div class="modal" :class="{'is-active': isActivedFashSearch}" @keyup.esc="handleFashSearchModal">
       <div class="modal-background"></div>
       <div class="modal-card">
-          <button class="delete" aria-label="close" @click="handleFashSearchModal"></button>
-          <FastSearch />
+          <FastSearch :items="items" />
       </div>
+      <button 
+        class="modal-close is-large" 
+        aria-label="close" 
+        @click="handleFashSearchModal"></button>
     </div>    
   </div>
 </template>
@@ -16,6 +19,7 @@
 import GlobalNav from '~/components/GlobalNav';
 import Footer from '~/components/Footer';
 import FastSearch from '~/components/FastSearch';
+import postDic from '~/static/postDic.json';
 export default {
   components: {
     GlobalNav,
@@ -24,6 +28,7 @@ export default {
   },
   data() {
     return {
+      items: postDic.items,
       isActivedFashSearch: false
     }
   },
@@ -31,6 +36,13 @@ export default {
     handleFashSearchModal() {
       this.isActivedFashSearch = !this.isActivedFashSearch;
     }
+  },
+  mounted() {
+    document.body.addEventListener('keyup', e => {
+      if (e.keyCode === 27 && this.isActivedFashSearch) {
+        this.isActivedFashSearch = false;
+      }
+    })
   },
   head() {
     let baseUrl = 'https://loving-wright-d0eedb.netlify.com';

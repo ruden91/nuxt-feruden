@@ -1,7 +1,7 @@
 const _ = require("lodash");
 require("dotenv").config();
 const client = require("./plugins/contentful");
-
+const fs = require("fs");
 module.exports = {
   /*
   ** Headers of the page
@@ -41,7 +41,10 @@ module.exports = {
     ]
   },
   css: [
-    { src: "~/node_modules/highlight.js/styles/atom-one-dark.css", lang: "css" }
+    {
+      src: "~/node_modules/highlight.js/styles/atom-one-dark.css",
+      lang: "css"
+    }
   ],
   /*
   ** Customize the progress bar color
@@ -68,14 +71,17 @@ module.exports = {
   plugins: [
     "~/plugins/contentful",
     { src: "~plugins/ga.js", ssr: false },
-    "~/plugins/disqus"
+    "~/plugins/disqus",
+    { src: "~/plugins/vue-progressive-image", ssr: false },
+    { src: "~/plugins/vue-infinite-scroll", ssr: false }
   ],
   modules: [
     "@nuxtjs/dotenv",
     "@nuxtjs/markdownit",
     "@nuxtjs/pwa",
     "@nuxtjs/sitemap",
-    "@nuxtjs/google-adsense"
+    "@nuxtjs/google-adsense",
+    "@nuxtjs/font-awesome"
   ],
   markdownit: {
     injected: true,
@@ -92,7 +98,11 @@ module.exports = {
       const tagsPosts = tags.map(item => ({
         route: `/tags/${item}`
       }));
-      console.log(tagsPosts);
+
+      fs.writeFile("./static/postDic.json", JSON.stringify({ items }), err => {
+        console.error(err);
+      });
+
       return [...blogPosts, ...tagsPosts];
     }
   },
@@ -110,7 +120,16 @@ module.exports = {
     gzip: true,
     async routes() {
       const { items } = await client.getEntries({ content_type: "blogPost" });
-      return items.map(item => `/blog/${item.fields.slug}`);
+      const tags = _.uniq(_.flattenDeep(items.map(item => item.fields.tags)));
+      const blogPosts = items.map(item => ({
+        route: `/blog/${item.fields.slug}`,
+        payload: item
+      }));
+      const tagsPosts = tags.map(item => ({
+        route: `/tags/${item}`
+      }));
+
+      return [...blogPosts, ...tagsPosts];
     }
   }
 };

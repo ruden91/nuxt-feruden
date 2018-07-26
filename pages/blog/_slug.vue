@@ -1,40 +1,50 @@
 <template>
-  <section>
-    <div class="bg-container">
-      <img 
-        :src="post.fields.heroImage.fields.file.url"
-        :alt="post.fields.title" 
-      />
-      <h1>{{ post.fields.title }}</h1>
-      <time>Published on {{ transformDateToMomentDate(post.fields.publishDate) }}</time>
+<div>
+  <section class="hero is-fullheight is-fullimage" :style="{'background-image': `url(${post.fields.heroImage.fields.file.url})`}">
+    <!-- Hero content: will be in the middle -->
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title">
+          {{ post.fields.title }}
+        </h1>
+        <h2 class="subtitle">
+          <time>Published on {{ transformDateToMomentDate(post.fields.publishDate) }}</time>
+        </h2>
+      </div>
+    </div>
+
+    <div class="hero-foot">
       <div class="bounce">
         <img src="~assets/images/down-arrow.png" />
       </div>      
     </div>
-    <div class="container container--comments">
-      <div class="content" v-html="$md.render(post.fields.body)">
-      </div>
-      <div class="tags">
-            <span 
-              v-for="(tag, index) in post.fields.tags" 
-              :key="index" 
-              class="tag is-link"
-            >
-              <nuxt-link :to="`/tags/${tag}`">
-                {{ tag }}
-              </nuxt-link>
-            </span>          
-      </div>
-      <div class="comments">
-        <vue-disqus 
-          :shortname="shortname"
-          :identifier="post.sys.id" 
-          :url="`${baseUrl}/blog/${post.fields.slug}`"
-        ></vue-disqus>
-      </div>      
-    </div>
-    <RelatedPostPreview :items="relatedPosts" />    
   </section>
+    <section>
+      <div class="container container--comments">
+        <div class="content" v-html="$md.render(post.fields.body)">
+        </div>
+        <div class="tags">
+          <span 
+            v-for="(tag, index) in post.fields.tags" 
+            :key="index" 
+            class="tag is-link"
+          >
+            <nuxt-link :to="`/tags/${tag}`">
+              {{ tag }}
+            </nuxt-link>
+          </span>          
+        </div>
+        <div class="comments">
+          <vue-disqus 
+            :shortname="shortname"
+            :identifier="post.sys.id" 
+            :url="`${baseUrl}/blog/${post.fields.slug}`"
+          ></vue-disqus>
+        </div>      
+      </div>
+      <RelatedPostPreview :items="relatedPosts" />    
+    </section>
+</div>
 </template>
   
 <script>
@@ -128,11 +138,13 @@ export default {
   margin-top: 30px;
   padding: 15px;
 }
-.bg-container {
+.is-fullimage {
   position: relative;
-  height: calc(100vh - 52px);
+  min-height: calc(100vh - 52px);
+  background-size: cover;
+  background-position: 50% 50%;
 }
-.bg-container .bounce {
+.is-fullimage .bounce {
   position: absolute;
   text-align: center;
   left: 0;
@@ -141,10 +153,10 @@ export default {
   color: #b3b3b3;
   animation: bounce 2s infinite;
 }
-.bg-container .bounce img {
+.is-fullimage .bounce img {
   width: 16px;
 }
-.bg-container:before {
+.is-fullimage:before {
   content: "";
   position: absolute;
   top: 0;
@@ -160,35 +172,16 @@ export default {
   );
   transition: all 0.4s ease-in-out;
 }
-.bg-container h1 {
-  text-align: center;
+.is-fullimage h1 {
   color: #fbfbfb;
   font-weight: 300;
-  font-size: 3.5vw;
   text-shadow: 2px 2px 2px #111;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 15%;
-  max-width: 80%;
-  margin: auto;
 }
-.bg-container time {
-  text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.is-fullimage time {
   color: #b3b3b3;
-  margin-top: 2rem;
-  margin-bottom: 4rem;
   font-size: 16px;
 }
-.bg-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+
 .container--comments {
   min-height: 250px;
 }

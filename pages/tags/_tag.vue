@@ -1,15 +1,28 @@
 <template>
-  <section>
-    <h2>Tags: {{tag}} ({{ tagPostCount }})</h2>
-    <ul>
-      <li v-for="(item, index) in items" :key="index">
+<div class="container">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Tags
+        </h1>
+        <h2 class="subtitle">
+          {{tag}} ({{ tagPostCount }})
+        </h2>
+      </div>
+    </div>
+  </section>  
+  <div class="tile is-ancestor">
+    <div class="tile is-parent">
+      <div class="tile is-child box" v-for="(item, index) in items" :key="index">
         <nuxt-link :to="`/blog/${item.fields.slug}`">
           <h3>{{ item.fields.title }}</h3>
           <p>{{ item.fields.description }}</p>
         </nuxt-link>
-      </li>
-    </ul>
-  </section>
+      </div>
+    </div>
+  </div>    
+</div>
 </template>
   
 <script>
