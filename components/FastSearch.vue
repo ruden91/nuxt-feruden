@@ -19,45 +19,53 @@
     >{{ category }}</a>
   </p>
   <div class="panel-content">
-    <nuxt-link 
-      class="panel-block" 
-      v-for="(item, index) in typingFilteredItems" 
-      :key="index"
-      :to="`/blog/${item.fields.slug}`"
-    >
-      <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
-      </span>
-      {{ item.fields.title }}
-    </nuxt-link>
+    <div @click="handleFastSearchItem" >
+      <nuxt-link 
+        class="panel-block"
+        v-for="(item, index) in typingFilteredItems" 
+        :key="index"
+        :to="`/blog/${item.fields.slug}`"
+      >
+        <span class="panel-icon">
+          <i class="fas fa-book" aria-hidden="true"></i>
+        </span>
+        {{ item.fields.title }}
+      </nuxt-link>      
+    </div>
   </div>
 </nav>
 </template>
   
 <script>
-import { filter, uniq } from 'lodash';
+import { EventBus } from "~/utils/event-bus";
+import { filter, uniq } from "lodash";
 export default {
-  name: 'FastSearch',
-  props: ['items'],
+  name: "FastSearch",
+  props: ["items"],
   data() {
     return {
-      content: '',
+      content: "",
       selectedFilterIndex: 0
-    }
-  },
-  mounted() {
-    console.log('mounted');
+    };
   },
   computed: {
     categories() {
-      return ['전체', ...uniq(this.items.map(item => item.fields.categories[0]))];
+      return [
+        "전체",
+        ...uniq(this.items.map(item => item.fields.categories[0]))
+      ];
     },
     filteredItems() {
       if (this.selectedFilterIndex === 0) {
         return this.items;
       }
       // return filter(this.items, item => item.fields.title.includes(this.content) || item.fields.categories[0].includes(this.content));
-      return filter(this.items, item => item.fields.categories[0] === this.categories[this.selectedFilterIndex]);
+      return filter(
+        this.items,
+        item =>
+          item.fields.categories[0] ===
+          this.categories[this.selectedFilterIndex]
+      );
     },
     typingFilteredItems() {
       return filter(this.filteredItems, item => {
@@ -69,11 +77,14 @@ export default {
     }
   },
   methods: {
+    handleFastSearchItem() {
+      EventBus.$emit("toggleModal", false);
+    },
     handleCategoryTab(index) {
       this.selectedFilterIndex = index;
     }
   }
-}
+};
 </script>
   
 <style scoped>

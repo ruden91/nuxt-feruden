@@ -37,20 +37,24 @@
   </nav>  
 </template>
 <script>
+import { EventBus } from "~/utils/event-bus";
 export default {
-  name: 'GlobalNav',
-  props: ['onHandleFashSearchModal'],
+  name: "GlobalNav",
+  props: ["onHandleFashSearchModal"],
   data() {
     return {
       toggleNav: false
-    }
+    };
   },
   methods: {
     toggleNavButton() {
       this.toggleNav = !this.toggleNav;
     }
-  }  
-}
+  },
+  mounted() {
+    EventBus.$on("toggleNavButton", this.toggleNavButton);
+  }
+};
 </script>
 <style scoped>
 .navbar {
