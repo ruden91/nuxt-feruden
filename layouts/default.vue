@@ -3,7 +3,12 @@
     <GlobalNav :onHandleFashSearchModal="handleFashSearchModal" />       
     <nuxt/>
     <Footer />
-    <div class="modal" :class="{'is-active': isActivedFashSearch}" @keyup.esc="handleFashSearchModal">
+    <div 
+      v-if="isActivedFashSearch"
+      class="modal" 
+      :class="{'is-active': isActivedFashSearch}" 
+      @keyup.esc="handleFashSearchModal"
+    >
       <div class="modal-background"></div>
       <div class="modal-card">
           <FastSearch :items="items" />

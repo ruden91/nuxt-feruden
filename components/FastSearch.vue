@@ -5,7 +5,13 @@
   </p>
   <div class="panel-block">
     <p class="control has-icons-left">
-      <input class="input is-small" type="text" placeholder="포스트 이름이나 카테고리를 입력하세요." v-model="content">
+      <input 
+        class="input is-small" 
+        type="text" 
+        placeholder="포스트 이름이나 카테고리를 입력하세요."
+        v-model="content"
+        ref="fastSearchInput"
+      >
       <span class="icon is-small is-left">
         <i class="fas fa-search" aria-hidden="true"></i>
       </span>
@@ -75,6 +81,9 @@ export default {
         return title.includes(content) || category.includes(content);
       });
     }
+  },
+  mounted() {
+    this.$refs.fastSearchInput.focus();
   },
   methods: {
     handleFastSearchItem() {
