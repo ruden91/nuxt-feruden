@@ -1,7 +1,7 @@
 <template>
 <nav class="panel">
   <p class="panel-heading">
-    빠른검색
+    빠른검색({{totalCount}}개)
   </p>
   <div class="panel-block">
     <p class="control has-icons-left">
@@ -13,7 +13,7 @@
         ref="fastSearchInput"
       >
       <span class="icon is-small is-left">
-        <i class="fas fa-search" aria-hidden="true"></i>
+        <i class="fa fas fa-search" aria-hidden="true"></i>
       </span>
     </p>
   </div>
@@ -33,7 +33,7 @@
         :to="`/blog/${item.fields.slug}`"
       >
         <span class="panel-icon">
-          <i class="fas fa-book" aria-hidden="true"></i>
+          <i class="fa fas fa-book" aria-hidden="true"></i>
         </span>
         {{ item.fields.title }}
       </nuxt-link>      
@@ -55,6 +55,9 @@ export default {
     };
   },
   computed: {
+    totalCount() {
+      return this.typingFilteredItems.length;
+    },
     categories() {
       return [
         "전체",
