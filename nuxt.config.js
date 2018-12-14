@@ -9,8 +9,7 @@ module.exports = {
   */
   head: {
     htmlAttrs: {
-      lang: "ko",
-      class: "has-navbar-fixed-top"
+      lang: "ko"
     },
     title: "FERuden | 프론트엔드 개발지식 공유 블로그",
     meta: [
@@ -29,7 +28,7 @@ module.exports = {
       {
         hid: "og:image",
         property: "og:image",
-        content: "https://loving-wright-d0eedb.netlify.com/main2.png"
+        content: "https://blog.feruden.com/main2.png"
       }
     ],
     link: [
@@ -117,7 +116,7 @@ module.exports = {
   sitemap: {
     path: "/sitemap.xml",
     generate: true,
-    hostname: "https://loving-wright-d0eedb.netlify.com",
+    hostname: "https://blog.feruden.com",
     gzip: true,
     async routes() {
       const { items } = await client.getEntries({ content_type: "blogPost" });
