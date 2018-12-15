@@ -1,6 +1,20 @@
 // mixins
-@import "./mixins/bem";
-@import "./mixins/position";
+@import "./mixins/index";
 
 // variables
 @import "./variables/gnb";
+
+body {
+  font-size: 14px;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}

@@ -1,6 +1,14 @@
 <template>
   <div class="feruden">
     <header class="feruden__header">
+      <div class="feruden__header-nav-holder">
+        <div class="feruden__header-nav-center-holder">
+          <button type="button">
+            {{ selectedCategory }}
+            <i class="feruden__triangle"/>
+          </button>
+        </div>
+      </div>
     </header>
     <div class="feruden__content">
       <nuxt/>
@@ -22,6 +30,7 @@ export default {
   },
   data() {
     return {
+      selectedCategory: "뉴스큐",
       items: postDic.items,
       footerTitle: "큐피드"
     };
@@ -82,6 +91,22 @@ export default {
     border-width: 0 1px 1px 0;
     display: inline-block;
     padding: 2px;
+  }
+  @include e("triangle") {
+    @include triangle("up", 4px);
+    transform: translate(-1px, -4px);
+  }
+  @include e("header-nav-holder") {
+    position: relative;
+    height: 100%;
+  }
+  @include e("header-nav-center-holder") {
+    @include centerAlign;
+
+    > button {
+      font-weight: 500;
+      height: $topGnbHeight;
+    }
   }
 }
 </style>
