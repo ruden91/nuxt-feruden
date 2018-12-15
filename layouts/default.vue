@@ -47,16 +47,16 @@ export default {
     border-bottom: 1px solid $gnbBorderColor;
     line-height: $topGnbHeight;
   }
-}
-.feruden__more-view {
-  width: 100%;
-  height: $bottomGnbHeight;
-  position: fixed;
-  bottom: 0;
-  border-top: 1px solid $gnbBorderColor;
-  line-height: $bottomGnbHeight;
-  padding-left: 30px;
-  .feruden__more-view-btn {
+  @include e("more-view") {
+    width: 100%;
+    height: $bottomGnbHeight;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid $gnbBorderColor;
+    line-height: $bottomGnbHeight;
+    padding-left: 30px;
+  }
+  @include e("more-view-btn") {
     position: relative;
     width: $bottomGnbHeight;
     height: $bottomGnbHeight;
@@ -64,8 +64,16 @@ export default {
     border: none;
     outline: none;
     transform: translateY(-1px);
+
+    p {
+      font-weight: bold;
+      display: inline-block;
+      padding-left: 15px;
+      vertical-align: top;
+      font-size: 14px;
+    }
   }
-  .feruden__arrow-icon {
+  @include e("arrow-icon") {
     position: absolute;
     top: 54%;
     left: 50%;
@@ -74,13 +82,6 @@ export default {
     border-width: 0 1px 1px 0;
     display: inline-block;
     padding: 2px;
-  }
-  p {
-    font-weight: bold;
-    display: inline-block;
-    padding-left: 15px;
-    vertical-align: top;
-    font-size: 14px;
   }
 }
 </style>

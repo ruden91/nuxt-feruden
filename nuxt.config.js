@@ -42,6 +42,10 @@ module.exports = {
   },
   css: [
     {
+      src: "~/node_modules/normalize.css",
+      lang: "css"
+    },
+    {
       src: "~/node_modules/highlight.js/styles/atom-one-dark.css",
       lang: "css"
     },
