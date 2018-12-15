@@ -5,12 +5,11 @@ const fs = require("fs");
 
 module.exports = {
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     htmlAttrs: {
-      lang: "ko",
-      class: "has-navbar-fixed-top"
+      lang: "ko"
     },
     title: "FERuden | 프론트엔드 개발지식 공유 블로그",
     meta: [
@@ -29,7 +28,7 @@ module.exports = {
       {
         hid: "og:image",
         property: "og:image",
-        content: "https://loving-wright-d0eedb.netlify.com/main2.png"
+        content: "https://blog.feruden.com/main2.png"
       }
     ],
     link: [
@@ -43,21 +42,29 @@ module.exports = {
   },
   css: [
     {
+      src: "~/node_modules/normalize.css",
+      lang: "css"
+    },
+    {
       src: "~/node_modules/highlight.js/styles/atom-one-dark.css",
       lang: "css"
+    },
+    {
+      src: "~/styles/main.scss",
+      lang: "scss"
     }
   ],
   /*
-  ** Customize the progress bar color
-  */
+   ** Customize the progress bar color
+   */
   loading: { color: "#3B8070" },
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** Run ESLint on save
-    */
+     ** Run ESLint on save
+     */
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -82,7 +89,8 @@ module.exports = {
     "@nuxtjs/pwa",
     "@nuxtjs/sitemap",
     "@nuxtjs/google-adsense",
-    "@nuxtjs/font-awesome"
+    "@nuxtjs/font-awesome",
+    ["nuxt-sass-resources-loader", ["~/styles/main.scss"]]
   ],
   markdownit: {
     injected: true,
@@ -117,7 +125,7 @@ module.exports = {
   sitemap: {
     path: "/sitemap.xml",
     generate: true,
-    hostname: "https://loving-wright-d0eedb.netlify.com",
+    hostname: "https://blog.feruden.com",
     gzip: true,
     async routes() {
       const { items } = await client.getEntries({ content_type: "blogPost" });

@@ -61,7 +61,7 @@ export default {
   data() {
     return {
       shortname: 'https-ruden91-github-io',
-      baseUrl: 'https://loving-wright-d0eedb.netlify.com'
+      baseUrl: 'https://blog.feruden.com'
     }
   },
   async asyncData({ params, errors, payload }) {
@@ -96,7 +96,7 @@ export default {
         { hid: 'og:description', property: 'og:description', content: this.post.fields.description},
         { hid: 'og:type', property: 'og:type', content: 'article'},
         { hid: 'og:locale', property: 'og:locale', content: 'ko'},
-        { hid: 'og:url', property: 'og:url', content: `https://loving-wright-d0eedb.netlify.com/blog/${this.post.fields.slug}`},
+        { hid: 'og:url', property: 'og:url', content: `https://blog.feruden.com/blog/${this.post.fields.slug}`},
         { hid:'og:image', property: 'og:image', content: this.post.fields.heroImage.fields.file.url},        
       ]      
     }

@@ -55,7 +55,7 @@ export default {
         { hid: 'og:description', property: 'og:description', content: `${this.tag}에 관련된 전체 포스팅을 살펴볼 수 있습니다.` },
         { hid: 'og:type', property: 'og:type', content: 'article'},
         { hid: 'og:locale', property: 'og:locale', content: 'ko'},
-        { hid: 'og:url', property: 'og:url', content: `https://loving-wright-d0eedb.netlify.com/tags/${this.tag}`},
+        { hid: 'og:url', property: 'og:url', content: `https://blog.feruden.com/tags/${this.tag}`},
         // { hid:'og:image', property: 'og:image', content: this.post.fields.heroImage.fields.file.url},        
       ]      
     }

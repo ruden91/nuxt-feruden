@@ -1,0 +1,24 @@
+@mixin triangle($direction: "up", $size: 5px, $color: "black") {
+  $border: #{$size} solid transparent;
+  $customBorder: #{$size} solid #{$color};
+  display: inline-block;
+  width: 0;
+  height: 0;
+  @if $direction == "up" {
+    border-left: $border;
+    border-right: $border;
+    border-bottom: $customBorder;
+  } @else if $direction == "down" {
+    border-left: $border;
+    border-right: $border;
+    border-top: $customBorder;
+  } @else if $direction == "right" {
+    border-top: $border;
+    border-bottom: $border;
+    border-left: $customBorder;
+  } @else {
+    border-top: $border;
+    border-bottom: $border;
+    border-right: $customBorder;
+  }
+}

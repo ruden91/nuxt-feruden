@@ -1,0 +1,25 @@
+// mixins
+@import "./mixins/index";
+
+// variables
+@import "./variables/index";
+
+body {
+  font-family: $font-face;
+  font-size: 14px;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+* {
+  letter-spacing: -0.5px;
+}
