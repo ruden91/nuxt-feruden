@@ -1,14 +1,16 @@
 <template>
   <div class="feruden">
+    <header class="feruden__header">
+    </header>
     <div class="feruden__content">
       <nuxt/>
     </div>
-    <div class="feruden__more-view">
+    <footer class="feruden__more-view">
       <button type="button" class="feruden__more-view-btn" @click="handleMoreView">
         <i class="feruden__arrow-icon"/>
       </button>
       <p>{{ footerTitle }}</p>
-    </div>
+    </footer>
   </div>
 </template>
 <script>
@@ -39,21 +41,28 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-$bottomSize: 40px;
+.feruden {
+  @include e("header") {
+    height: $topGnbHeight;
+    border-bottom: 1px solid $gnbBorderColor;
+    line-height: $topGnbHeight;
+  }
+}
 .feruden__more-view {
   width: 100%;
-  height: $bottomSize;
+  height: $bottomGnbHeight;
   position: fixed;
   bottom: 0;
-  border-top: 1px solid #ddd;
-  line-height: $bottomSize;
+  border-top: 1px solid $gnbBorderColor;
+  line-height: $bottomGnbHeight;
   padding-left: 30px;
   .feruden__more-view-btn {
     position: relative;
-    width: $bottomSize;
-    height: $bottomSize;
+    width: $bottomGnbHeight;
+    height: $bottomGnbHeight;
     background-color: #222;
     border: none;
+    outline: none;
     transform: translateY(-1px);
   }
   .feruden__arrow-icon {

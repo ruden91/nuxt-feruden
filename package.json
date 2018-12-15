@@ -25,6 +25,7 @@
     "markdown-it-highlightjs": "^3.0.0",
     "moment": "^2.22.2",
     "nuxt": "^1.0.0",
+    "nuxt-sass-resources-loader": "^2.0.5",
     "velocity-animate": "^1.5.2",
     "vue-disqus": "^3.0.3",
     "vue-infinite-scroll": "^2.0.2",

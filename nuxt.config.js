@@ -5,8 +5,8 @@ const fs = require("fs");
 
 module.exports = {
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     htmlAttrs: {
       lang: "ko"
@@ -44,19 +44,23 @@ module.exports = {
     {
       src: "~/node_modules/highlight.js/styles/atom-one-dark.css",
       lang: "css"
+    },
+    {
+      src: "~/styles/main.scss",
+      lang: "scss"
     }
   ],
   /*
-  ** Customize the progress bar color
-  */
+   ** Customize the progress bar color
+   */
   loading: { color: "#3B8070" },
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** Run ESLint on save
-    */
+     ** Run ESLint on save
+     */
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -81,7 +85,8 @@ module.exports = {
     "@nuxtjs/pwa",
     "@nuxtjs/sitemap",
     "@nuxtjs/google-adsense",
-    "@nuxtjs/font-awesome"
+    "@nuxtjs/font-awesome",
+    ["nuxt-sass-resources-loader", ["~/styles/main.scss"]]
   ],
   markdownit: {
     injected: true,
