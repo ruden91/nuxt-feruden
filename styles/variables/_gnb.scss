@@ -1,4 +1,4 @@
-$topGnbHeight: 40px;
+$topGnbHeight: 55px;
 $bottomGnbHeight: 40px;
-
+$contentHeight: calc(100vh- (#{$topGnbHeight}+#{$bottomGnbHeight}));
 $gnbBorderColor: #ddd;

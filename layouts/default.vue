@@ -3,27 +3,48 @@
     <header class="feruden__header">
       <div class="feruden__header-nav-holder">
         <div class="feruden__header-nav-center-holder">
-          <button type="button">
+          <button type="button" @click="toggleCagetories">
             {{ selectedCategory }}
-            <i class="feruden__triangle"/>
+            <i :class="['feruden__triangle', {'active': showCategories}]"/>
           </button>
         </div>
       </div>
     </header>
-    <div class="feruden__content">
-      <nuxt/>
-    </div>
-    <footer class="feruden__more-view">
-      <button type="button" class="feruden__more-view-btn" @click="handleMoreView">
-        <i class="feruden__arrow-icon"/>
-      </button>
-      <p>{{ footerTitle }}</p>
-    </footer>
+    <transition v-on:enter="enter" v-on:leave="leave">
+      <div class="feruden__inner-navigator" v-show="showCategories">
+        <ul>
+          <li v-for="category in categories" :key="category['title']">
+            <button @click="selectCategory">
+              <p>{{ category['title'] }}</p>
+              <small>{{ category['description'] }}</small>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </transition>
+    <transition v-on:enter="contentEnter" v-on:leave="contentLeave">
+      <div :class="['feruden__content']" v-show="!showCategories">
+        <nuxt/>
+      </div>
+    </transition>
+    <transition v-on:enter="footerEnter" v-on:leave="footerLeave">
+      <footer :class="['feruden__more-view']" v-show="!showCategories">
+        <button type="button" class="feruden__more-view-btn" @click="handleMoreView">
+          <i class="feruden__arrow-icon"/>
+        </button>
+        <p>{{ footerTitle }}</p>
+      </footer>
+    </transition>
   </div>
 </template>
 <script>
+let Velocity;
+if (process.browser) {
+  Velocity = require("velocity-animate");
+}
 import Footer from "~/components/Footer";
 import postDic from "~/static/postDic.json";
+
 export default {
   components: {
     Footer
@@ -32,10 +53,59 @@ export default {
     return {
       selectedCategory: "뉴스큐",
       items: postDic.items,
-      footerTitle: "큐피드"
+      footerTitle: "큐피드",
+      showCategories: false,
+      categories: [
+        {
+          title: "테크뷰",
+          description: "기술관련 아티클"
+        },
+        {
+          title: "인기뷰",
+          description: "가장 많이 본 아티클"
+        },
+        {
+          title: "추천뷰",
+          description: "알면 좋은 아티클"
+        }
+      ]
     };
   },
   methods: {
+    selectCategory() {},
+    enter(el, done) {
+      if (process.browser) {
+        Velocity(el, "slideDown");
+      }
+    },
+    leave(el, done) {
+      if (process.browser) {
+        Velocity(el, "slideUp");
+      }
+    },
+    contentEnter(el, done) {
+      if (process.browser) {
+        Velocity(el, "fadeIn");
+      }
+    },
+    contentLeave(el, done) {
+      if (process.browser) {
+        Velocity(el, "fadeOut");
+      }
+    },
+    footerEnter(el, done) {
+      if (process.browser) {
+        Velocity(el, "slideDown");
+      }
+    },
+    footerLeave(el, done) {
+      if (process.browser) {
+        Velocity(el, "slideUp");
+      }
+    },
+    toggleCagetories() {
+      this.showCategories = !this.showCategories;
+    },
     handleMoreView() {
       console.log("handleMoreView");
     }
@@ -64,6 +134,7 @@ export default {
     border-top: 1px solid $gnbBorderColor;
     line-height: $bottomGnbHeight;
     padding-left: 30px;
+    background-color: #fff;
   }
   @include e("more-view-btn") {
     position: relative;
@@ -94,7 +165,33 @@ export default {
   }
   @include e("triangle") {
     @include triangle("up", 4px);
-    transform: translate(-1px, -4px);
+    transform: translate(1px, -4px);
+    transition: transform 0.35s ease-in-out;
+    &.active {
+      transform: translate(3px, -4px) rotate(180deg);
+    }
+  }
+  @include e("content") {
+    height: $contentHeight;
+  }
+  @include e("inner-navigator") {
+    height: calc(#{$contentHeight}+#{$bottomGnbHeight});
+    ul {
+      text-align: center;
+      li {
+        height: 55px;
+        line-height: 55px;
+        button {
+          display: block;
+          width: 100%;
+          height: 100%;
+          small {
+            color: #999;
+            font-size: 11px;
+          }
+        }
+      }
+    }
   }
   @include e("header-nav-holder") {
     position: relative;
@@ -104,8 +201,10 @@ export default {
     @include centerAlign;
 
     > button {
+      padding-right: 4px;
       font-weight: 500;
       height: $topGnbHeight;
+      margin-left: 15px;
     }
   }
 }

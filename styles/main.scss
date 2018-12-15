@@ -2,9 +2,10 @@
 @import "./mixins/index";
 
 // variables
-@import "./variables/gnb";
+@import "./variables/index";
 
 body {
+  font-family: $font-face;
   font-size: 14px;
 }
 
@@ -17,4 +18,8 @@ button {
   cursor: pointer;
   overflow: hidden;
   outline: none;
+}
+
+* {
+  letter-spacing: -0.5px;
 }
