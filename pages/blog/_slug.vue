@@ -1,5 +1,10 @@
 <template>
   <section class="feruden__blog">
+    <div
+      v-show="modalState"
+      :class="['feruden-blog__modal-dim', {'has-animate': allowTransition}]"
+      @click="handleModal(false)"
+    />
     <Tag :name="currentPost.fields.categories[0]"/>
     <h1 class="feruden__blog-title">{{ currentPost.fields.title }}</h1>
     <time class="feruden__blog-time">{{ transformDateToMomentDate(currentPost.sys.createdAt) }}</time>
@@ -14,14 +19,10 @@
     <no-ssr>
       <v-touch @pan="onPan">
         <div
-          :class="['feruden-blog__modal', {'show': modalState}]"
+          :class="['feruden-blog__modal', {'show': modalState, 'has-animate': allowTransition}]"
           :style="{ height: `${height}px`, transform: `translateY(${calcTranslateY}px)`}"
         >
-          <button
-            class="feruden-blog__comments"
-            :style="{'background-image': `url(${commentIcon})`}"
-            @click="handleModal(false)"
-          />
+          <div class="feruden-blog__modal-close-handler"/>
           <vue-disqus
             :shortname="shortname"
             :identifier="currentPost.sys.id"
@@ -64,8 +65,21 @@ export default {
       lastPosY: 0,
       isDragging: false,
       height: 500,
-      calcTranslateY: 500
+      calcTranslateY: 500,
+      allowTransition: true
     };
+  },
+  watch: {
+    modalState() {
+      if (process.browser) {
+        let el = document.getElementsByTagName("html")[0];
+        if (this.modalState) {
+          el.style.overflow = "hidden";
+        } else {
+          el.style.overflow = "auto";
+        }
+      }
+    }
   },
   computed: {
     currentPost() {
@@ -83,20 +97,21 @@ export default {
     onPan(el) {
       let posY = 0;
       const target = el.target;
+      this.allowTransition = false;
       if (this.isDragging) {
         this.isDragging = true;
         this.lastPosY = el.offsetTop;
       }
       posY = el.deltaY + this.lastPosY;
       this.calcTranslateY = posY <= 0 ? 0 : posY;
-      if (this.calcTranslateY >= 500) {
-        this.handleModal(false);
-      }
+
       if (el.isFinal) {
         this.isDragging = false;
-        if (this.calcTranslateY > 0) {
-          console.log(this.calcTranslateY);
+        this.allowTransition = true;
+        if (this.calcTranslateY >= 250) {
           this.handleModal(false);
+        } else {
+          this.handleModal();
         }
       }
     },
@@ -222,25 +237,38 @@ export default {
     background-size: 30px 30px;
   }
   @include e("modal") {
-    background-color: #777;
+    background-color: #fff;
     width: 100%;
     padding: 30px;
     position: fixed;
     bottom: 0;
     margin-left: -12px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     /* transition: all 0.35s ease-in-out; */
     transform: translateY(500px);
     &.show {
       transform: translateY(0);
     }
+    &.has-animate {
+      transition: all 0.35s ease-in-out;
+    }
   }
-  @include e("modal-handler") {
+  @include e("modal-dim") {
     position: absolute;
-    width: 80px;
-    height: 5px;
-    background-color: #222;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  @include e("modal-close-handler") {
+    position: absolute;
+    width: 35px;
+    height: 4px;
+    background-color: #fff;
     border-radius: 10px;
-    top: -4%;
+    top: -1.5%;
     left: 50%;
     transform: translateX(-50%);
     cursor: grab;
