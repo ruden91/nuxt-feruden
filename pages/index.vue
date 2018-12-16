@@ -1,5 +1,37 @@
 <template>
-  <section>
+  <section class="feruden-main">
+    <div v-swiper:mySwiper="swiperOption">
+      <div class="feruden-main__swiper-holder-line">
+        <div>
+          <span class="feruden-main__swiper-holder-line-highlight"/>
+        </div>
+      </div>
+      <div class="swiper-wrapper feruden-main__swiper-wrapper">
+        <div
+          class="swiper-slide feruden-main__swiper-slide"
+          v-for="(item, index) in items"
+          :key="item.sys.id"
+        >
+          <div class="feruden-main__swiper-slide-backdrop">
+            <img :src="item.fields.heroImage.fields.file.url">
+          </div>
+          <div class="feruden-main__swiper-slide-content">
+            <div>
+              <div class="feruden-main__swiper-slide-content-inner-img-wrapper">
+                <img :src="item.fields.heroImage.fields.file.url">
+              </div>
+              <div class="feruden-main__swiper-slide-inner-content">
+                <p>{{ ++index }}</p>
+                <h2>{{item.fields.title}}</h2>
+                <time>{{item.fields.publishDate}}</time>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <section>
     <div class="container">
       <div class="columns is-multiline">
         <div class="column is-one-third" v-for="(item, index) in items" :key="index">
@@ -21,97 +53,146 @@
         </div>
       </div>
     </div>        
-  </section>
+  </section>-->
 </template>
   
 <script>
-import moment from 'moment';
-import 'moment/locale/ko';
-import client from '~/plugins/contentful'
+import moment from "moment";
+import "moment/locale/ko";
+import client from "~/plugins/contentful";
 export default {
-  name: 'index',
+  data() {
+    return {
+      swiperOption: {
+        loop: true,
+        slidesPerView: "auto",
+        centeredSlides: true,
+        on: {
+          slideChange() {
+            console.log("onSlideChangeEnd", this);
+          },
+          tap() {
+            console.log("onTap", this);
+          }
+        }
+      }
+    };
+  },
   async asyncData() {
     let { items } = await client.getEntries({
-      content_type: 'blogPost',
-      order: '-sys.createdAt'
+      content_type: "blogPost",
+      order: "-sys.createdAt"
     });
     return {
       items
-    }
-  },
-  methods: {
-    transformDateToMomentDate(date) {
-      return moment(date).fromNow();
-    }
+    };
   }
-}
+  // methods: {
+  //   transformDateToMomentDate(date) {
+  //     return moment(date).fromNow();
+  //   }
+  // }
+};
 </script>
   
-<style scoped>
-section {
-  margin-top: 20px;
-  padding: 0 15px;
-}
-
-.main-card {
-}
-.main-card__content {
-  margin-top: 10px;
+<style lang="scss" scoped>
+.feruden-main {
   position: relative;
-  padding: 0 10px;
-}
+  @include e("swiper-slide") {
+    position: relative;
+    height: $contentHeight;
+  }
+  @include e("swiper-slide-backdrop") {
+    position: relative;
+    height: 250px;
+    img {
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      object-fit: cover;
+    }
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.65);
+    }
+  }
+  @include e("swiper-slide-content") {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    > div {
+      margin: 35px;
+      height: 425px;
+    }
+  }
+  @include e("swiper-slide-content-inner-img-wrapper") {
+    height: 215px;
+    img {
+      width: 100%;
+      object-fit: cover;
+      height: 100%;
+    }
+  }
+  @include e("swiper-slide-inner-content") {
+    padding: 20px 35px;
+    > p,
+    h2 {
+      @include column-break(3);
+      font-weight: bold;
+    }
+    > p {
+      font-size: 20px;
+      margin-bottom: 7px;
+    }
+    > h2 {
+      font-size: 26px;
+      margin-bottom: 30px;
+    }
 
-.main-card__description {
-  color: #7a7a7a;
-  font-size: 12px;
-  margin-top: 15px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* 라인수 */
-  -webkit-box-orient: vertical;
-  word-wrap: break-word;
-}
-.main-card time {
-  padding-top: 5px;
-  float: right;
-  font-size: 10px;
-  color: #7a7a7a;
-}
-.main-card img {
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 5px;
-}
-.main-card .main-card__title {
-  color: #363636;
-  font-size: 14px;
-  padding-right: 60px;
-}
-.main-card .card-image {
-}
-.main-card .tag {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #f5f5f5;
-  border-radius: 3px;
-  color: #7a7a7a;
-  height: 2rem;
-  line-height: 1.2;
-  padding-left: 0.7em;
-  padding-right: 0.7em;
-  padding-bottom: 1px;
-}
-
-/* @media all and (max-width: 1024px) {
-  .is-one-third {
-    width: 50% !important;
+    > small {
+      font-size: 13px;
+      color: #999;
+    }
+  }
+  @include e("swiper-holder-line") {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    overflow: hidden;
+    > div {
+      height: 470px;
+      border: 12px solid rgba(0, 0, 0, 0.3);
+      margin: 35px 35px 0 35px;
+    }
+  }
+  @include e("swiper-holder-line-highlight") {
+    position: absolute;
+    right: 41px;
+    top: 97.6%;
+    z-index: 1;
+    display: block;
+    width: 120px;
+    height: 12px;
+    background-image: linear-gradient(
+      to right,
+      #889ae7,
+      #84a1e8,
+      #82a7e7,
+      #81ade7,
+      #83b2e5
+    );
+    transform: skew(45deg, 0deg);
   }
 }
-
-@media all and (max-width: 499px) {
-  .is-one-third {
-    width: 100% !important;
-  }
-} */
 </style>
