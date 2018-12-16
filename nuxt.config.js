@@ -63,7 +63,21 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    vendor: ["vue-touch"],
+    vendor: [
+      "~/plugins/vuetouch",
+      "~/plugins/contentful",
+      "~/plugins/disqus",
+      "~/plugins/ga",
+      "~/plugins/nuxt-swiper-plugin",
+      "~/plugins/vue-infinite-scroll",
+      "~/plugins/vue-progressive-image",
+      "moment",
+      "axios",
+      "vue-masonry",
+      "velocity-animate",
+      "markdown-it-highlightjs",
+      "normalize.css"
+    ],
     /*
      ** Run ESLint on save
      */
@@ -97,7 +111,6 @@ module.exports = {
     "@nuxtjs/pwa",
     "@nuxtjs/sitemap",
     "@nuxtjs/google-adsense",
-    "@nuxtjs/font-awesome",
     ["nuxt-sass-resources-loader", ["~/styles/main.scss"]]
   ],
   markdownit: {
