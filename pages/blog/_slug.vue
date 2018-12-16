@@ -228,7 +228,7 @@ export default {
     position: fixed;
     bottom: 0;
     margin-left: -12px;
-    transition: all 0.35s ease-in-out;
+    /* transition: all 0.35s ease-in-out; */
     transform: translateY(500px);
     &.show {
       transform: translateY(0);
