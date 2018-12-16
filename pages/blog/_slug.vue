@@ -1,22 +1,23 @@
 <template>
   <section class="feruden__blog">
-    <p>태그 목록</p>
-    <h1 class="feruden__blog-title">타이틀 타이틀 타이틀 타이틀 타이틀 타이틀 타이틀 타이틀</h1>
-    <time>dddddddddd</time>
-    <div class="feruden__blog-md-content" v-html="$md.render(post.fields.body)"></div>
+    <Tag :name="currentPost.fields.categories[0]"/>
+    <h1 class="feruden__blog-title">{{ currentPost.fields.title }}</h1>
+    <time class="feruden__blog-time">{{ transformDateToMomentDate(currentPost.sys.createdAt) }}</time>
+    <div class="feruden__blog-md-content" v-html="$md.render(currentPost.fields.body)"></div>
   </section>
 </template>
   
 <script>
 import RelatedPostPreview from "~/components/RelatedPostPreview.vue";
-import moment from "moment";
-import "moment/locale/ko";
 import client from "~/plugins/contentful";
-import { sampleSize } from "lodash";
+import postMixins from "~/helpers/post";
+import Tag from "~/components/Tag";
 export default {
   layout: "blog",
+  mixins: [postMixins],
   scrollToTop: true,
   components: {
+    Tag,
     RelatedPostPreview
   },
   data() {
@@ -25,67 +26,52 @@ export default {
       baseUrl: "https://blog.feruden.com"
     };
   },
-  async asyncData({ params, errors, payload }) {
-    if (payload) {
-      return {
-        post: payload
-      };
+  computed: {
+    currentPost() {
+      return this.$store.state.posts.currentPost;
+    },
+    isLoading() {
+      return this.$store.state.posts.isLoading;
     }
-
-    let { items } = await client.getEntries({
-      content_type: "blogPost"
-    });
-    let post = items.filter(item => item.fields.slug === params.slug)[0];
-    let relatedPosts = items.filter(
-      item =>
-        item.fields.categories[0] === post.fields.categories[0] &&
-        post.sys.id !== item.sys.id
-    );
-    console.log("get");
-    return {
-      post,
-      relatedPosts
-    };
   },
-  head() {
-    return {
-      title: this.post.fields.title,
-      meta: [
-        {
-          hid: "description",
-          name: "description",
-          content: this.post.fields.description
-        },
-        {
-          hid: "og:title",
-          property: "og:title",
-          content: `FERuden | ${this.post.fields.title}`
-        },
-        {
-          hid: "og:description",
-          property: "og:description",
-          content: this.post.fields.description
-        },
-        { hid: "og:type", property: "og:type", content: "article" },
-        { hid: "og:locale", property: "og:locale", content: "ko" },
-        {
-          hid: "og:url",
-          property: "og:url",
-          content: `https://blog.feruden.com/blog/${this.post.fields.slug}`
-        },
-        {
-          hid: "og:image",
-          property: "og:image",
-          content: this.post.fields.heroImage.fields.file.url
-        }
-      ]
-    };
-  },
-  methods: {
-    transformDateToMomentDate(date) {
-      return moment(date).format("YYYY-MM-DD (ddd)");
-    }
+  async fetch({ store, params }) {
+    const { slug } = params;
+    await store.dispatch("posts/getPostBySlug", slug);
   }
+  // head() {
+  //   return {
+  //     title: this.post.fields.title,
+  //     meta: [
+  //       {
+  //         hid: "description",
+  //         name: "description",
+  //         content: this.post.fields.description
+  //       },
+  //       {
+  //         hid: "og:title",
+  //         property: "og:title",
+  //         content: `FERuden | ${this.post.fields.title}`
+  //       },
+  //       {
+  //         hid: "og:description",
+  //         property: "og:description",
+  //         content: this.post.fields.description
+  //       },
+  //       { hid: "og:type", property: "og:type", content: "article" },
+  //       { hid: "og:locale", property: "og:locale", content: "ko" },
+  //       {
+  //         hid: "og:url",
+  //         property: "og:url",
+  //         content: `https://blog.feruden.com/blog/${this.post.fields.slug}`
+  //       },
+  //       {
+  //         hid: "og:image",
+  //         property: "og:image",
+  //         content: this.post.fields.heroImage.fields.file.url
+  //       }
+  //     ]
+  //   };
+  // }
 };
 </script>
 
@@ -137,6 +123,11 @@ export default {
     padding: 12px 12px 20px 12px;
   }
   @include e("blog-title") {
+  }
+  @include e("blog-time") {
+    color: #999;
+    font-size: 12px;
+    letter-spacing: 0;
   }
 }
 </style>
