@@ -63,7 +63,20 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    vendor: ["vue-touch"],
+    vendor: [
+      "vue-touch",
+      "font-awesome",
+      "moment",
+      "vue-disqus",
+      "vue-infinite-scroll",
+      "vue-masonry",
+      "vue-awesome-swiper",
+      "velocity-animate",
+      "axios",
+      "contentful",
+      "markdown-it-highlightjs",
+      "normalize.css"
+    ],
     /*
      ** Run ESLint on save
      */
