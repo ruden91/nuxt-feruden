@@ -106,6 +106,7 @@ module.exports = {
     { src: "~/plugins/vuetouch", ssr: false }
   ],
   modules: [
+    "@nuxtjs/component-cache",
     "@nuxtjs/dotenv",
     "@nuxtjs/markdownit",
     "@nuxtjs/pwa",
