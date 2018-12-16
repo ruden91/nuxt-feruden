@@ -20,6 +20,8 @@
             </button>
           </li>
         </ul>
+        <div class="feruden__ad-holder"></div>
+        <WaterMark/>
       </div>
     </transition>
     <transition v-on:enter="contentEnter" v-on:leave="contentLeave">
@@ -44,10 +46,11 @@ if (process.browser) {
 }
 import Footer from "~/components/Footer";
 import postDic from "~/static/postDic.json";
-
+import WaterMark from "~/components/WaterMark";
 export default {
   components: {
-    Footer
+    Footer,
+    WaterMark
   },
   data() {
     return {
@@ -206,6 +209,17 @@ export default {
       height: $topGnbHeight;
       margin-left: 15px;
     }
+  }
+  @include e("ad-holder") {
+    background-image: linear-gradient(
+      to right,
+      #889ae7,
+      #84a1e8,
+      #82a7e7,
+      #81ade7,
+      #83b2e5
+    );
+    height: 80px;
   }
 }
 </style>
