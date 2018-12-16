@@ -4,8 +4,10 @@
       <div class="feruden__header-nav-holder">
         <div class="feruden__header-nav-center-holder">
           <button type="button" @click="toggleCagetories">
-            {{ selectedCategory }}
-            <i :class="['feruden__triangle', {'active': showCategories}]"/>
+            {{ selectedCategory['title'] }}
+            <i
+              :class="['feruden__triangle', {'active': showCategories}]"
+            />
           </button>
         </div>
       </div>
@@ -14,7 +16,7 @@
       <div class="feruden__inner-navigator" v-show="showCategories">
         <ul>
           <li v-for="category in categories" :key="category['title']">
-            <button @click="selectCategory">
+            <button @click="selectCategory(category)">
               <p>{{ category['title'] }}</p>
               <small>{{ category['description'] }}</small>
             </button>
@@ -74,8 +76,13 @@ export default {
       ]
     };
   },
+  created() {
+    this.selectCategory(this.categories[0]);
+  },
   methods: {
-    selectCategory() {},
+    selectCategory(category) {
+      this.selectedCategory = category;
+    },
     enter(el, done) {
       if (process.browser) {
         Velocity(el, "slideDown");
@@ -188,6 +195,17 @@ export default {
           display: block;
           width: 100%;
           height: 100%;
+          /* &:active,
+          &:focus {
+            background-image: linear-gradient(
+              to right,
+              #889ae7,
+              #84a1e8,
+              #82a7e7,
+              #81ade7,
+              #83b2e5
+            );
+          } */
           small {
             color: #999;
             font-size: 11px;

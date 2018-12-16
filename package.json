@@ -1,7 +1,7 @@
 {
-  "name": "FERuden",
+  "name": "VIEW",
   "version": "1.0.0",
-  "description": "프론트엔드 개발지식 나눔 블로그 | javascript, vue, react, es6, webpack, jquery",
+  "description": "개발자들을 위한 개발관련 이슈 공유 서비스. 힘들게 찾지말고 VEIW에서 확인해보세요!",
   "author": "ruden <ruden91@naver.com>",
   "private": true,
   "scripts": {
