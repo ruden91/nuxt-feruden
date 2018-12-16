@@ -1,32 +1,34 @@
 <template>
   <section class="feruden-main">
     <div v-swiper:mySwiper="swiperOption">
-      <div class="feruden-main__swiper-holder-line">
+      <!-- <div class="feruden-main__swiper-holder-line">
         <div>
           <span class="feruden-main__swiper-holder-line-highlight"/>
         </div>
-      </div>
+      </div>-->
       <div class="swiper-wrapper feruden-main__swiper-wrapper">
         <div
           class="swiper-slide feruden-main__swiper-slide"
           v-for="(item, index) in items"
           :key="item.sys.id"
         >
-          <div class="feruden-main__swiper-slide-backdrop">
-            <img :src="item.fields.heroImage.fields.file.url">
-          </div>
-          <div class="feruden-main__swiper-slide-content">
-            <div>
-              <div class="feruden-main__swiper-slide-content-inner-img-wrapper">
-                <img :src="item.fields.heroImage.fields.file.url">
-              </div>
-              <div class="feruden-main__swiper-slide-inner-content">
-                <p>{{ ++index }}</p>
-                <h2>{{item.fields.title}}</h2>
-                <time>{{item.fields.publishDate}}</time>
+          <nuxt-link :to="`/blog/${item.fields.slug}`">
+            <div class="feruden-main__swiper-slide-backdrop">
+              <img :src="item.fields.heroImage.fields.file.url">
+            </div>
+            <div class="feruden-main__swiper-slide-content">
+              <div>
+                <div class="feruden-main__swiper-slide-content-inner-img-wrapper">
+                  <img :src="item.fields.heroImage.fields.file.url">
+                </div>
+                <div class="feruden-main__swiper-slide-inner-content">
+                  <p>{{ ++index }}</p>
+                  <h2>{{item.fields.title}}</h2>
+                  <time>{{item.fields.publishDate}}</time>
+                </div>
               </div>
             </div>
-          </div>
+          </nuxt-link>
         </div>
       </div>
     </div>
