@@ -3,6 +3,7 @@
     <div
       v-show="modalState"
       :class="['feruden-blog__modal-dim', {'has-animate': allowTransition}]"
+      :style="{'height': dimHeight}"
       @click="handleModal(false)"
     />
     <Tag :name="currentPost.fields.categories[0]"/>
@@ -66,7 +67,8 @@ export default {
       isDragging: false,
       height: 500,
       calcTranslateY: 500,
-      allowTransition: true
+      allowTransition: true,
+      dimHeight: "100%"
     };
   },
   watch: {
@@ -124,7 +126,9 @@ export default {
       this.modalState = state;
     }
   },
-  mounted() {}
+  mounted() {
+    this.dimHeight = `${document.body.scrollHeight}px`;
+  }
   // head() {
   //   return {
   //     title: this.post.fields.title,
