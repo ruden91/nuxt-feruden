@@ -41,6 +41,7 @@ module.exports = {
     ]
   },
   css: [
+    "swiper/dist/css/swiper.css",
     {
       src: "~/node_modules/normalize.css",
       lang: "css"
@@ -81,7 +82,8 @@ module.exports = {
     { src: "~plugins/ga.js", ssr: false },
     "~/plugins/disqus",
     { src: "~/plugins/vue-progressive-image", ssr: false },
-    { src: "~/plugins/vue-infinite-scroll", ssr: false }
+    { src: "~/plugins/vue-infinite-scroll", ssr: false },
+    { src: "~/plugins/nuxt-swiper-plugin.js", ssr: false }
   ],
   modules: [
     "@nuxtjs/dotenv",
