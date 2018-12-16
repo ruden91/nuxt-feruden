@@ -2,6 +2,8 @@
   <section class="feruden__blog">
     <p>태그 목록</p>
     <h1 class="feruden__blog-title">타이틀 타이틀 타이틀 타이틀 타이틀 타이틀 타이틀 타이틀</h1>
+    <time>dddddddddd</time>
+    <div class="feruden__blog-md-content" v-html="$md.render(post.fields.body)"></div>
   </section>
 </template>
   
@@ -87,8 +89,54 @@ export default {
 };
 </script>
 
+<style lang="scss">
+.feruden {
+  @include e("blog") {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 600;
+      margin: 0.67em 0;
+    }
+    h1 {
+      font-size: 1.6em;
+    }
+    h2 {
+      font-size: 1.5em;
+    }
+    h3 {
+      font-size: 1.17em;
+    }
+    h4 {
+    }
+    h5 {
+      font-size: 0.83em;
+    }
+    h6 {
+      font-size: 0.67em;
+    }
+  }
+
+  @include e("blog-md-content") {
+    margin-top: 15px;
+    pre {
+      background-color: #fff;
+      padding: 1.25rem 0;
+      margin: 0 -12px;
+    }
+  }
+}
+</style>
+
 <style lang="scss" scoped>
 .feruden {
+  @include e("blog") {
+    padding: 12px 12px 20px 12px;
+    margin-bottom: 40px;
+  }
   @include e("blog-title") {
   }
 }
