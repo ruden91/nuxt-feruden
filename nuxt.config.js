@@ -63,10 +63,15 @@ module.exports = {
    ** Build configuration
    */
   build: {
+    vendor: ["vue-touch"],
     /*
      ** Run ESLint on save
      */
-    extend(config, { isDev, isClient }) {
+    extend(config, { isDev, isClient, isServer }) {
+      // if (isServer) {
+      //   config.resolve.alias["hammerjs$"] =
+      //     this.options.rootDir + "node_modules/vue-touch/dist/hammer-ssr.js";
+      // }
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: "pre",
@@ -83,7 +88,8 @@ module.exports = {
     "~/plugins/disqus",
     { src: "~/plugins/vue-progressive-image", ssr: false },
     { src: "~/plugins/vue-infinite-scroll", ssr: false },
-    { src: "~/plugins/nuxt-swiper-plugin.js", ssr: false }
+    { src: "~/plugins/nuxt-swiper-plugin.js", ssr: false },
+    { src: "~/plugins/vuetouch", ssr: false }
   ],
   modules: [
     "@nuxtjs/dotenv",

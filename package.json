@@ -33,7 +33,8 @@
     "vue-infinite-scroll": "^2.0.2",
     "vue-masonry": "^0.11.4",
     "vue-no-ssr": "^0.2.2",
-    "vue-progressive-image": "^3.1.0"
+    "vue-progressive-image": "^3.1.0",
+    "vue-touch": "^2.0.0-beta.4"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

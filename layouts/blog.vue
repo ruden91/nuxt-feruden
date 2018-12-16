@@ -6,7 +6,6 @@
     <div class="feruden__content">
       <nuxt/>
     </div>
-    <footer class="feruden__footer">footer</footer>
   </div>
 </template>
 <script>
@@ -56,16 +55,6 @@ export default {
   @include e("content") {
     margin-top: $topGnbHeight;
     margin-bottom: $bottomGnbHeight;
-  }
-  @include e("footer") {
-    width: 100%;
-    height: $bottomGnbHeight;
-    position: fixed;
-    bottom: 0;
-    border-top: 1px solid $gnbBorderColor;
-    line-height: $bottomGnbHeight;
-    padding: 0 30px;
-    background-color: #fff;
   }
   @include e("header-close") {
     float: right;
