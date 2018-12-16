@@ -135,7 +135,6 @@ export default {
 .feruden {
   @include e("blog") {
     padding: 12px 12px 20px 12px;
-    margin-bottom: 40px;
   }
   @include e("blog-title") {
   }
