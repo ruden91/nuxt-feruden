@@ -9,22 +9,22 @@
       <div class="swiper-wrapper feruden-main__swiper-wrapper">
         <div
           class="swiper-slide feruden-main__swiper-slide"
-          v-for="(item, index) in items"
-          :key="item.sys.id"
+          v-for="(post, index) in posts"
+          :key="post.sys.id"
         >
-          <nuxt-link :to="`/blog/${item.fields.slug}`">
+          <nuxt-link :to="`/blog/${post.fields.slug}`">
             <div class="feruden-main__swiper-slide-backdrop">
-              <img :src="item.fields.heroImage.fields.file.url">
+              <img :src="post.fields.heroImage.fields.file.url">
             </div>
             <div class="feruden-main__swiper-slide-content">
               <div>
                 <div class="feruden-main__swiper-slide-content-inner-img-wrapper">
-                  <img :src="item.fields.heroImage.fields.file.url">
+                  <img :src="post.fields.heroImage.fields.file.url">
                 </div>
                 <div class="feruden-main__swiper-slide-inner-content">
                   <p>{{ ++index }}</p>
-                  <h2>{{item.fields.title}}</h2>
-                  <time>{{item.fields.publishDate}}</time>
+                  <h2>{{post.fields.title}}</h2>
+                  <time>{{post.fields.publishDate}}</time>
                 </div>
               </div>
             </div>
@@ -36,18 +36,18 @@
   <!-- <section>
     <div class="container">
       <div class="columns is-multiline">
-        <div class="column is-one-third" v-for="(item, index) in items" :key="index">
+        <div class="column is-one-third" v-for="(post, index) in posts" :key="index">
           <div class="main-card">
-            <nuxt-link :to="`/blog/${item.fields.slug}`">
+            <nuxt-link :to="`/blog/${post.fields.slug}`">
             <div class="card-image">
               <figure class="image is-5by3">
-                <img :src="item.fields.heroImage.fields.file.url" />
+                <img :src="post.fields.heroImage.fields.file.url" />
               </figure>
               <div class="main-card__content">
-                <p class="main-card__title">{{ item.fields.title }}</p>
-                <span class="tag">{{ item.fields.categories[0] }}</span>
-                <p class="main-card__description">{{ item.fields.description}}</p>
-                <time>{{ transformDateToMomentDate(item.fields.publishDate)}}</time>
+                <p class="main-card__title">{{ post.fields.title }}</p>
+                <span class="tag">{{ post.fields.categories[0] }}</span>
+                <p class="main-card__description">{{ post.fields.description}}</p>
+                <time>{{ transformDateToMomentDate(post.fields.publishDate)}}</time>
               </div>
             </div>
             </nuxt-link>
@@ -80,20 +80,14 @@ export default {
       }
     };
   },
-  async asyncData() {
-    let { items } = await client.getEntries({
-      content_type: "blogPost",
-      order: "-sys.createdAt"
-    });
-    return {
-      items
-    };
+  computed: {
+    posts() {
+      return this.$store.state.posts.posts;
+    }
+  },
+  async fetch({ store, params }) {
+    await store.dispatch("posts/getPosts", params);
   }
-  // methods: {
-  //   transformDateToMomentDate(date) {
-  //     return moment(date).fromNow();
-  //   }
-  // }
 };
 </script>
   
