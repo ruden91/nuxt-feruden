@@ -1,11 +1,14 @@
 <template>
   <section class="feruden-main">
-    <div v-swiper:mySwiper="swiperOption">
-      <!-- <div class="feruden-main__swiper-holder-line">
-        <div>
-          <span class="feruden-main__swiper-holder-line-highlight"/>
+    <div v-swiper:mySwiper="swiperOption" @slideChange="runOnChange">
+      <div class="feruden-main__swiper-holder-line">
+        <div class="feruden-main__swiper-holder-line-inner">
+          <span
+            class="feruden-main__swiper-holder-line-highlight"
+            :style="{'background-image': selectedPallete.gradient }"
+          />
         </div>
-      </div>-->
+      </div>
       <div class="swiper-wrapper feruden-main__swiper-wrapper">
         <div
           class="swiper-slide feruden-main__swiper-slide"
@@ -22,9 +25,9 @@
                   <img :src="post.fields.heroImage.fields.file.url">
                 </div>
                 <div class="feruden-main__swiper-slide-inner-content">
-                  <p>{{ ++index }}</p>
-                  <h2>{{post.fields.title}}</h2>
-                  <time>{{post.fields.publishDate}}</time>
+                  <p :style="{color: selectedPallete.color }">{{ ++index }}</p>
+                  <h2 :style="{color: selectedPallete.color }">{{post.fields.title}}</h2>
+                  <time>{{transformDateToMomentDate(post.fields.publishDate)}}</time>
                 </div>
               </div>
             </div>
@@ -36,26 +39,19 @@
 </template>
   
 <script>
+import postMixins from "~/helpers/post";
+import { palette } from "~/api";
+import sample from "lodash/sample";
 export default {
-  transition: "bounce",
-  // transition(to, from) {
-  //   console.log("to", to);
-  //   console.log("from", from);
-  // },
+  mixins: [postMixins],
   data() {
     return {
+      palette,
+      selectedPallete: {},
       swiperOption: {
         loop: true,
         slidesPerView: "auto",
-        centeredSlides: true,
-        on: {
-          slideChange() {
-            console.log("onSlideChangeEnd", this);
-          },
-          tap() {
-            console.log("onTap", this);
-          }
-        }
+        centeredSlides: true
       }
     };
   },
@@ -64,12 +60,20 @@ export default {
       return this.$store.state.posts.posts;
     }
   },
+  created() {
+    this.runOnChange();
+  },
+  methods: {
+    runOnChange() {
+      this.selectedPallete = sample(this.palette);
+    }
+  },
   async fetch({ store, params }) {
     await store.dispatch("posts/getPosts", params);
   }
 };
 </script>
-  
+
 <style lang="scss" scoped>
 .feruden-main {
   position: relative;
@@ -136,6 +140,11 @@ export default {
       font-size: 13px;
       color: #999;
     }
+    time {
+      position: absolute;
+      bottom: 15px;
+      color: #777;
+    }
   }
   @include e("swiper-holder-line") {
     width: 100%;
@@ -145,6 +154,7 @@ export default {
     transform: translateX(-50%);
     z-index: 3;
     overflow: hidden;
+    pointer-events: none;
     > div {
       height: 470px;
       border: 12px solid rgba(0, 0, 0, 0.3);

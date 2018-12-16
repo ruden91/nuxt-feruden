@@ -16,7 +16,12 @@ export default {
   layout: "blog",
   mixins: [postMixins],
   scrollToTop: true,
-  transition: "bounce",
+  // transition(to, from) {
+  //   if (!from) {
+  //     return;
+  //   }
+  //   return from.path === "/" ? "out-bounce" : "in-bounce";
+  // },
   components: {
     Tag,
     RelatedPostPreview
