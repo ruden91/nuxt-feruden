@@ -29,18 +29,19 @@
 
 ### Future Ideas
 
-- [x] - 하위 서브 페이지 추가
+- [ ] - 하위 서브 페이지 추가
 - [ ] - 모아보기
 - [ ] - Notification
 - [ ] - 공유하기
 - [ ] - 하위 VIEW 탭 컨텐츠 채우기
 - [ ] - 컨텐츠 검색
+- [ ] - 폰트사이즈 컨트롤
 
 ### Running Locally
 
 ```bash
 # Clone this repository
-git clone https://github.com/ruden91/todoist.git
+git clone https://github.com/ruden91/nuxt-feruden.git
 
 # Go into the repository
 cd todoist
