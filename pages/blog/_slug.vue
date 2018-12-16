@@ -1,188 +1,95 @@
 <template>
-<div>
-  <section class="hero is-fullheight is-fullimage" :style="{'background-image': `url(${post.fields.heroImage.fields.file.url})`}">
-    <!-- Hero content: will be in the middle -->
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <h1 class="title">
-          {{ post.fields.title }}
-        </h1>
-        <h2 class="subtitle">
-          <time>Published on {{ transformDateToMomentDate(post.fields.publishDate) }}</time>
-        </h2>
-      </div>
-    </div>
-
-    <div class="hero-foot">
-      <div class="bounce">
-        <img src="~assets/images/down-arrow.png" />
-      </div>      
-    </div>
+  <section class="feruden__blog">
+    <p>태그 목록</p>
+    <h1 class="feruden__blog-title">타이틀 타이틀 타이틀 타이틀 타이틀 타이틀 타이틀 타이틀</h1>
   </section>
-    <section>
-      <div class="container container--comments">
-        <div class="content" v-html="$md.render(post.fields.body)">
-        </div>
-        <div class="tags">
-          <span 
-            v-for="(tag, index) in post.fields.tags" 
-            :key="index" 
-            class="tag is-link"
-          >
-            <nuxt-link :to="`/tags/${tag}`">
-              {{ tag }}
-            </nuxt-link>
-          </span>          
-        </div>
-        <div class="comments">
-          <vue-disqus 
-            :shortname="shortname"
-            :identifier="post.sys.id" 
-            :url="`${baseUrl}/blog/${post.fields.slug}`"
-          ></vue-disqus>
-        </div>      
-      </div>
-      <RelatedPostPreview :items="relatedPosts" />    
-    </section>
-</div>
 </template>
   
 <script>
-import RelatedPostPreview from '~/components/RelatedPostPreview.vue';
-import moment from 'moment';
-import 'moment/locale/ko';
-import client from '~/plugins/contentful';
-import { sampleSize } from 'lodash';
+import RelatedPostPreview from "~/components/RelatedPostPreview.vue";
+import moment from "moment";
+import "moment/locale/ko";
+import client from "~/plugins/contentful";
+import { sampleSize } from "lodash";
 export default {
+  layout: "blog",
   scrollToTop: true,
   components: {
     RelatedPostPreview
   },
   data() {
     return {
-      shortname: 'https-ruden91-github-io',
-      baseUrl: 'https://blog.feruden.com'
-    }
+      shortname: "https-ruden91-github-io",
+      baseUrl: "https://blog.feruden.com"
+    };
   },
   async asyncData({ params, errors, payload }) {
     if (payload) {
       return {
         post: payload
-      }
+      };
     }
 
     let { items } = await client.getEntries({
-      content_type: 'blogPost'
+      content_type: "blogPost"
     });
     let post = items.filter(item => item.fields.slug === params.slug)[0];
-    let relatedPosts = items.filter(item => (item.fields.categories[0] === post.fields.categories[0]) && post.sys.id !== item.sys.id);
-
-    if (relatedPosts.length === 0) {
-      relatedPosts = items.filter(item => post.sys.id !== item.sys.id);
-    }
-    relatedPosts = sampleSize(relatedPosts, 3);
-    
+    let relatedPosts = items.filter(
+      item =>
+        item.fields.categories[0] === post.fields.categories[0] &&
+        post.sys.id !== item.sys.id
+    );
+    console.log("get");
     return {
       post,
       relatedPosts
-    }
+    };
   },
   head() {
     return {
       title: this.post.fields.title,
       meta: [
-        { hid: 'description', name: 'description', content: this.post.fields.description },
-        { hid: 'og:title', property: 'og:title', content: `FERuden | ${this.post.fields.title}`},
-        { hid: 'og:description', property: 'og:description', content: this.post.fields.description},
-        { hid: 'og:type', property: 'og:type', content: 'article'},
-        { hid: 'og:locale', property: 'og:locale', content: 'ko'},
-        { hid: 'og:url', property: 'og:url', content: `https://blog.feruden.com/blog/${this.post.fields.slug}`},
-        { hid:'og:image', property: 'og:image', content: this.post.fields.heroImage.fields.file.url},        
-      ]      
-    }
+        {
+          hid: "description",
+          name: "description",
+          content: this.post.fields.description
+        },
+        {
+          hid: "og:title",
+          property: "og:title",
+          content: `FERuden | ${this.post.fields.title}`
+        },
+        {
+          hid: "og:description",
+          property: "og:description",
+          content: this.post.fields.description
+        },
+        { hid: "og:type", property: "og:type", content: "article" },
+        { hid: "og:locale", property: "og:locale", content: "ko" },
+        {
+          hid: "og:url",
+          property: "og:url",
+          content: `https://blog.feruden.com/blog/${this.post.fields.slug}`
+        },
+        {
+          hid: "og:image",
+          property: "og:image",
+          content: this.post.fields.heroImage.fields.file.url
+        }
+      ]
+    };
   },
   methods: {
     transformDateToMomentDate(date) {
-      return moment(date).format('YYYY-MM-DD (ddd)')
+      return moment(date).format("YYYY-MM-DD (ddd)");
     }
-  }     
-}
+  }
+};
 </script>
-<style>
-.content pre {
-  padding: 0;
-  background-color: transparent;
-}
-</style>
 
-<style scoped>
-.tag a {
-  color: #fff;
-}
-@keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  to {
-    transform: translateY(0);
+<style lang="scss" scoped>
+.feruden {
+  @include e("blog-title") {
   }
-  40% {
-    transform: translateY(-6px);
-  }
-  60% {
-    transform: translateY(-2px);
-  }
-}
-.container {
-  margin-top: 30px;
-  padding: 15px;
-}
-.is-fullimage {
-  position: relative;
-  min-height: calc(100vh - 52px);
-  background-size: cover;
-  background-position: 50% 50%;
-}
-.is-fullimage .bounce {
-  position: absolute;
-  text-align: center;
-  left: 0;
-  right: 0;
-  bottom: 15px;
-  color: #b3b3b3;
-  animation: bounce 2s infinite;
-}
-.is-fullimage .bounce img {
-  width: 16px;
-}
-.is-fullimage:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    0deg,
-    hsla(0, 0%, 7%, 0.8),
-    hsla(0, 0%, 7%, 0.5),
-    transparent,
-    transparent
-  );
-  transition: all 0.4s ease-in-out;
-}
-.is-fullimage h1 {
-  color: #fbfbfb;
-  font-weight: 300;
-  text-shadow: 2px 2px 2px #111;
-}
-.is-fullimage time {
-  color: #b3b3b3;
-  font-size: 16px;
-}
-
-.container--comments {
-  min-height: 250px;
 }
 </style>
