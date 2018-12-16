@@ -116,9 +116,7 @@ export default {
     toggleCagetories() {
       this.showCategories = !this.showCategories;
     },
-    handleMoreView() {
-      console.log("handleMoreView");
-    }
+    handleMoreView() {}
   },
   head() {
     let baseUrl = "https://blog.feruden.com";

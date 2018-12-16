@@ -17,12 +17,12 @@
         >
           <nuxt-link :to="`/blog/${post.fields.slug}`">
             <div class="feruden-main__swiper-slide-backdrop">
-              <img :src="post.fields.heroImage.fields.file.url">
+              <img :src="post.fields.heroImage.fields.file.url" :alt="post.fields.title">
             </div>
             <div class="feruden-main__swiper-slide-content">
               <div>
                 <div class="feruden-main__swiper-slide-content-inner-img-wrapper">
-                  <img :src="post.fields.heroImage.fields.file.url">
+                  <img :src="post.fields.heroImage.fields.file.url" :alt="post.fields.title">
                 </div>
                 <div class="feruden-main__swiper-slide-inner-content">
                   <p :style="{color: selectedPallete.color }">{{ ++index }}</p>
