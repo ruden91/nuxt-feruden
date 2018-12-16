@@ -64,16 +64,17 @@ module.exports = {
    */
   build: {
     vendor: [
-      "vue-touch",
-      "font-awesome",
+      "~/plugins/vuetouch",
+      "~/plugins/contentful",
+      "~/plugins/disqus",
+      "~/plugins/ga",
+      "~/plugins/nuxt-swiper-plugin",
+      "~/plugins/vue-infinite-scroll",
+      "~/plugins/vue-progressive-image",
       "moment",
-      "vue-disqus",
-      "vue-infinite-scroll",
-      "vue-masonry",
-      "vue-awesome-swiper",
-      "velocity-animate",
       "axios",
-      "contentful",
+      "vue-masonry",
+      "velocity-animate",
       "markdown-it-highlightjs",
       "normalize.css"
     ],
@@ -110,7 +111,6 @@ module.exports = {
     "@nuxtjs/pwa",
     "@nuxtjs/sitemap",
     "@nuxtjs/google-adsense",
-    "@nuxtjs/font-awesome",
     ["nuxt-sass-resources-loader", ["~/styles/main.scss"]]
   ],
   markdownit: {
