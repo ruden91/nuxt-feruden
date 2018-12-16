@@ -37,6 +37,11 @@
   
 <script>
 export default {
+  transition: "bounce",
+  // transition(to, from) {
+  //   console.log("to", to);
+  //   console.log("from", from);
+  // },
   data() {
     return {
       swiperOption: {
