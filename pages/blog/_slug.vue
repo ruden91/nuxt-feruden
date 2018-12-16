@@ -16,6 +16,7 @@ export default {
   layout: "blog",
   mixins: [postMixins],
   scrollToTop: true,
+  transition: "bounce",
   components: {
     Tag,
     RelatedPostPreview

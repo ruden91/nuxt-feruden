@@ -11,7 +11,7 @@ module.exports = {
     htmlAttrs: {
       lang: "ko"
     },
-    title: "FERuden | 프론트엔드 개발지식 공유 블로그",
+    title: "V{IE}W",
     meta: [
       {
         name: "google-site-verification",
@@ -23,7 +23,7 @@ module.exports = {
         hid: "description",
         name: "description",
         content:
-          "프론트엔드 개발지식 나눔 블로그 | javascript, vue, react, es6, webpack, jquery"
+          "개발자들을 위한 개발관련 이슈 공유 서비스. 힘들게 찾지말고 VEIW에서 확인해보세요!"
       },
       {
         hid: "og:image",

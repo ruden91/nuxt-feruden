@@ -33,36 +33,15 @@
       </div>
     </div>
   </section>
-  <!-- <section>
-    <div class="container">
-      <div class="columns is-multiline">
-        <div class="column is-one-third" v-for="(post, index) in posts" :key="index">
-          <div class="main-card">
-            <nuxt-link :to="`/blog/${post.fields.slug}`">
-            <div class="card-image">
-              <figure class="image is-5by3">
-                <img :src="post.fields.heroImage.fields.file.url" />
-              </figure>
-              <div class="main-card__content">
-                <p class="main-card__title">{{ post.fields.title }}</p>
-                <span class="tag">{{ post.fields.categories[0] }}</span>
-                <p class="main-card__description">{{ post.fields.description}}</p>
-                <time>{{ transformDateToMomentDate(post.fields.publishDate)}}</time>
-              </div>
-            </div>
-            </nuxt-link>
-          </div>        
-        </div>
-      </div>
-    </div>        
-  </section>-->
 </template>
   
 <script>
-import moment from "moment";
-import "moment/locale/ko";
-import client from "~/plugins/contentful";
 export default {
+  transition: "bounce",
+  // transition(to, from) {
+  //   console.log("to", to);
+  //   console.log("from", from);
+  // },
   data() {
     return {
       swiperOption: {
