@@ -8,32 +8,44 @@ const workboxSW = new self.WorkboxSW({
 
 workboxSW.precache([
   {
-    "url": "/_nuxt/app.85cbe492cf0f9cd9b85b.js",
-    "revision": "81cd894eaeadf2eeb8a50573a6e82cc2"
+    "url": "/_nuxt/app.e56227a62ff3dc8da4ba.js",
+    "revision": "18d5966d3cd884b6e065d088971d7da6"
   },
   {
-    "url": "/_nuxt/layouts/default.09e09ab421a9ce4416ec.js",
-    "revision": "fcbb6b0c565fb1e24c732a31695e5feb"
+    "url": "/_nuxt/layouts/blog.4193b57b7bfd6da65c08.js",
+    "revision": "05481777e13f4d8f64c480813bd84808"
   },
   {
-    "url": "/_nuxt/manifest.3a954bb887a2f6670277.js",
-    "revision": "f510810ef412cbe2a8cfcecdb4d8576f"
+    "url": "/_nuxt/layouts/default.8766c33a720326ca67d1.js",
+    "revision": "42b1fcf4b905b8405dbdd022b06bc958"
   },
   {
-    "url": "/_nuxt/pages/blog/_slug.1abfe7d99fc72fc4c5c4.js",
-    "revision": "d19ac82c812634bf67851650c3fca66a"
+    "url": "/_nuxt/layouts/test.9aadd49a93cf26808154.js",
+    "revision": "d61a35bfff40dbaab0fa2bf862474052"
   },
   {
-    "url": "/_nuxt/pages/index.21c5d5bab247819bc05d.js",
-    "revision": "a0f57ada0a5cc6cb83916ef9883ad73e"
+    "url": "/_nuxt/manifest.dc038df7b78f53d42152.js",
+    "revision": "f77138dea5d7e9ead85294705958c2a7"
   },
   {
-    "url": "/_nuxt/pages/tags/_tag.2512f7d66649ad2de24a.js",
-    "revision": "d2392be42dbd95efabe36503ecf51be5"
+    "url": "/_nuxt/pages/blog/_slug.677cfd07590ea19761e3.js",
+    "revision": "bc0fe497efc2672f3464a7cb2a31f8e3"
   },
   {
-    "url": "/_nuxt/vendor.3ac1b183e39b77ee6753.js",
-    "revision": "b51f3e6ad0eb0355e1b9b8735a43f839"
+    "url": "/_nuxt/pages/index.b158075165c3174743ad.js",
+    "revision": "f7ca2015b4b2bab61c8b7a4244809fa2"
+  },
+  {
+    "url": "/_nuxt/pages/tags/_tag.403eba2249ec3a74f3e2.js",
+    "revision": "db7392cc16f74b7fe2348caca13a3ba3"
+  },
+  {
+    "url": "/_nuxt/pages/test/index.63bdd55edc6c57394b90.js",
+    "revision": "3333632bf54dd60421d474598b090546"
+  },
+  {
+    "url": "/_nuxt/vendor.4c0421d1f991c542fc8b.js",
+    "revision": "d1d05f345ac1d1b79bdec4dd3e0c56a2"
   }
 ])
 
