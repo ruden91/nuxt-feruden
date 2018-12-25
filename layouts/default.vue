@@ -50,8 +50,11 @@
       </footer>
     </transition>
     <Sider :open="siderState">
-      <div slot="header">
-        <button @click="handleSider">click</button>
+      <div slot="header" class="feruden__sider-header">
+        <button @click="handleSider" class="feruden__left-arrow">
+          <i/>
+        </button>
+        <p>포스팅 검색</p>
       </div>
       <div slot="content" class="feruden__sider-content">
         <Search @changeKeyword="changeKeyword"/>
@@ -227,11 +230,11 @@ export default {
     padding: 2px;
   }
   @include e("triangle") {
-    @include triangle("up", 4px);
+    @include triangle("down", 4px);
     transform: translate(1px, -4px);
     transition: transform 0.35s ease-in-out;
     &.active {
-      transform: translate(3px, -4px) rotate(180deg);
+      transform: translate(3px, -4px) rotate(-180deg);
     }
   }
   @include e("content") {
@@ -316,6 +319,28 @@ export default {
     h3 {
       font-weight: 600;
       font-size: 16px;
+    }
+  }
+  @include e("left-arrow") {
+    width: 40px;
+    height: 40px;
+    i {
+      border: solid black;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(135deg);
+    }
+  }
+  @include e("sider-content") {
+    padding: 12px;
+  }
+  @include e("sider-header") {
+    position: relative;
+    p {
+      @include centerAlign;
+      color: #000;
+      font-weight: 600;
     }
   }
 }

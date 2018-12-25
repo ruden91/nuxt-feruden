@@ -97,6 +97,7 @@ module.exports = {
     }
   },
   plugins: [
+    "~/plugins/directives.js",
     "~/plugins/contentful",
     { src: "~plugins/ga.js", ssr: false },
     "~/plugins/disqus",
