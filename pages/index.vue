@@ -1,40 +1,47 @@
 <template>
   <section class="feruden-main">
-    <div v-swiper:mySwiper="swiperOption" @slideChange="runOnChange">
-      <div class="feruden-main__swiper-holder-line">
-        <div class="feruden-main__swiper-holder-line-inner">
-          <span
-            class="feruden-main__swiper-holder-line-highlight"
-            :style="{'background-image': selectedPallete.gradient }"
-          />
+    <template v-if="selectedCategory.type === 'tech'">
+      <div v-swiper:mySwiper="swiperOption" @slideChange="runOnChange">
+        <div class="feruden-main__swiper-holder-line">
+          <div class="feruden-main__swiper-holder-line-inner">
+            <span
+              class="feruden-main__swiper-holder-line-highlight"
+              :style="{'background-image': selectedPallete.gradient }"
+            />
+          </div>
         </div>
-      </div>
-      <div class="swiper-wrapper feruden-main__swiper-wrapper">
-        <div
-          class="swiper-slide feruden-main__swiper-slide"
-          v-for="(post, index) in posts"
-          :key="post.sys.id"
-        >
-          <nuxt-link :to="`/blog/${post.fields.slug}`">
-            <div class="feruden-main__swiper-slide-backdrop">
-              <img :src="post.fields.heroImage.fields.file.url" :alt="post.fields.title">
-            </div>
-            <div class="feruden-main__swiper-slide-content">
-              <div>
-                <div class="feruden-main__swiper-slide-content-inner-img-wrapper">
-                  <img :src="post.fields.heroImage.fields.file.url" :alt="post.fields.title">
-                </div>
-                <div class="feruden-main__swiper-slide-inner-content">
-                  <p :style="{color: selectedPallete.color }">{{ ++index }}</p>
-                  <h2 :style="{color: selectedPallete.color }">{{post.fields.title}}</h2>
-                  <time>{{transformDateToMomentDate(post.fields.publishDate)}}</time>
+        <div class="swiper-wrapper feruden-main__swiper-wrapper">
+          <div
+            class="swiper-slide feruden-main__swiper-slide"
+            v-for="(post, index) in posts"
+            :key="post.id"
+          >
+            <nuxt-link :to="`/blog/${post.slug}`">
+              <div class="feruden-main__swiper-slide-backdrop">
+                <img :src="post.image" :alt="post.title">
+              </div>
+              <div class="feruden-main__swiper-slide-content">
+                <div>
+                  <div class="feruden-main__swiper-slide-content-inner-img-wrapper">
+                    <img :src="post.image" :alt="post.title">
+                  </div>
+                  <div class="feruden-main__swiper-slide-inner-content">
+                    <p :style="{color: selectedPallete.color }">{{ ++index }}</p>
+                    <h2 :style="{color: selectedPallete.color }">{{post.title}}</h2>
+                    <time>{{transformDateToMomentDate(post.publishDate)}}</time>
+                  </div>
                 </div>
               </div>
-            </div>
-          </nuxt-link>
+            </nuxt-link>
+          </div>
         </div>
       </div>
-    </div>
+    </template>
+    <template>
+      <div class="feruden-main__card-bg">
+        <CardHolder :items="posts"/>
+      </div>
+    </template>
   </section>
 </template>
   
@@ -43,8 +50,12 @@ import postMixins from "~/helpers/post";
 import { mapState, mapGetters } from "vuex";
 import { palette } from "~/api";
 import sample from "lodash/sample";
+import CardHolder from "~/components/postViewer/CardHolder";
 export default {
   mixins: [postMixins],
+  components: {
+    CardHolder
+  },
   data() {
     return {
       palette,
@@ -57,6 +68,9 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      selectedCategory: state => state.uiState.selectedCategory
+    }),
     ...mapGetters("posts", ["filteredPosts"]),
     posts() {
       return this.$store.state.posts.posts;
@@ -180,6 +194,10 @@ export default {
       #83b2e5
     );
     transform: skew(45deg, 0deg);
+  }
+  @include e("card-bg") {
+    background-color: #f7f7f7;
+    padding-bottom: 40px;
   }
 }
 </style>

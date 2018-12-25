@@ -1,4 +1,6 @@
 import client from "~/plugins/contentful";
+import { refineContentfulPost } from "~/utils/helpers";
+
 export const state = () => ({
   posts: [],
   currentPost: {},
@@ -8,7 +10,6 @@ export const state = () => ({
 export const getters = {
   filteredPosts(state, getters, rootState) {
     const { selectedCategory } = rootState;
-    console.log(selectedCategory);
     return [];
   }
 };
@@ -33,7 +34,8 @@ export const actions = {
     });
 
     if (res.items.length > 0) {
-      commit("setPosts", res.items);
+      const data = res.items.map(item => refineContentfulPost(item));
+      commit("setPosts", data);
     }
   },
   async getPostBySlug({ commit }, slug) {
