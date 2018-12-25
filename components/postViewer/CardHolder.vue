@@ -1,13 +1,15 @@
 <template>
   <div class="card-holder">
     <div class="card-holder__item-holder" v-for="(item, index) in items" :key="item.id">
-      <Card
-        :title="item.title"
-        :rank="++index"
-        :image="item.image"
-        :description="transformDateToMomentDate(item.publishDate)"
-        :tags="item.tags"
-      />
+      <nuxt-link :to="makeNuxtLink(item.slug)">
+        <Card
+          :title="item.title"
+          :rank="++index"
+          :image="item.image"
+          :description="transformDateToMomentDate(item.publishDate)"
+          :tags="item.tags"
+        />
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -27,11 +29,17 @@ export default {
         return [];
       }
     }
+  },
+  methods: {
+    makeNuxtLink(slug) {
+      return `/blog/${slug}`;
+    }
   }
 };
 </script>
 <style lang="scss" scoped>
 .card-holder {
+  padding-top: 10px;
   @include e("item-holder") {
     background-color: #fff;
     padding: 12px;
