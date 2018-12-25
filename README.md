@@ -44,7 +44,7 @@
 git clone https://github.com/ruden91/nuxt-feruden.git
 
 # Go into the repository
-cd todoist
+cd nuxt-feruden
 
 # Install dependencies
 yarn
