@@ -10,6 +10,16 @@
             />
           </button>
         </div>
+        <div class="feruden__header-nav-right-holder">
+          <div v-if="showCategories">
+            <Button iconType="search"/>
+            <Button iconType="settings"/>
+          </div>
+          <div v-else>
+            <Button iconType="notification"/>
+            <Button iconType="user"/>
+          </div>
+        </div>
       </div>
     </header>
     <transition v-on:enter="enter" v-on:leave="leave">
@@ -49,11 +59,13 @@ if (process.browser) {
 import Footer from "~/components/Footer";
 import postDic from "~/static/postDic.json";
 import WaterMark from "~/components/WaterMark";
+import Button from "~/components/buttons/Button";
 import { mapState, mapActions } from "vuex";
 export default {
   components: {
     Footer,
-    WaterMark
+    WaterMark,
+    Button
   },
   data() {
     return {
@@ -65,14 +77,22 @@ export default {
     ...mapState({
       selectedCategory: state => state.uiState.selectedCategory,
       categories: state => state.uiState.categories,
-      showCategories: state => state.uiState.showCategories
+      showCategories: state => state.uiState.showCategories,
+      initialApp: state => state.uiState.initialApp
     })
   },
   created() {
-    this.selectCategory(this.categories[0]);
+    if (this.initialApp) {
+      this.selectCategory(this.categories[0]);
+      this.initApp();
+    }
   },
   methods: {
-    ...mapActions("uiState", ["selectCategory", "openCategoriesPanel"]),
+    ...mapActions("uiState", [
+      "selectCategory",
+      "openCategoriesPanel",
+      "initApp"
+    ]),
     handleSelectCategory(category) {
       this.selectCategory(category);
       this.openCategoriesPanel();
@@ -203,6 +223,7 @@ export default {
     }
   }
   @include e("header-nav-holder") {
+    @include clearfix;
     position: relative;
     height: 100%;
   }
@@ -226,6 +247,16 @@ export default {
       #83b2e5
     );
     height: 80px;
+  }
+  @include e("header-nav-right-holder") {
+    padding-top: 5px;
+    float: right;
+    height: 100%;
+    button {
+      background-color: transparent;
+      padding: 10px;
+      margin-right: 5px;
+    }
   }
 }
 </style>
