@@ -3,7 +3,7 @@
     {{ name }}
     <template v-if="allowIcon">
       <slot name="icon">
-        <Icon iconType="close"/>
+        <Icon :iconType="iconType"/>
       </slot>
     </template>
   </button>
@@ -16,6 +16,10 @@ export default {
     Icon
   },
   props: {
+    iconType: {
+      type: String,
+      default: "close"
+    },
     size: {
       type: String,
       default: "40px"
