@@ -3,7 +3,7 @@
     <header class="feruden__header">
       <div class="feruden__header-nav-holder">
         <div class="feruden__header-nav-center-holder">
-          <button type="button" @click="toggleCagetories">
+          <button type="button" @click="openCategoriesPanel">
             {{ selectedCategory['title'] }}
             <i
               :class="['feruden__triangle', {'active': showCategories}]"
@@ -16,7 +16,7 @@
       <div class="feruden__inner-navigator" v-show="showCategories">
         <ul>
           <li v-for="category in categories" :key="category['title']">
-            <button @click="selectCategory(category)">
+            <button @click="handleSelectCategory(category)">
               <p>{{ category['title'] }}</p>
               <small>{{ category['description'] }}</small>
             </button>
@@ -33,7 +33,7 @@
     </transition>
     <transition v-on:enter="footerEnter" v-on:leave="footerLeave">
       <footer :class="['feruden__more-view']" v-show="!showCategories">
-        <button type="button" class="feruden__more-view-btn" @click="handleMoreView">
+        <button type="button" class="feruden__more-view-btn">
           <i class="feruden__arrow-icon"/>
         </button>
         <p>{{ footerTitle }}</p>
@@ -49,6 +49,7 @@ if (process.browser) {
 import Footer from "~/components/Footer";
 import postDic from "~/static/postDic.json";
 import WaterMark from "~/components/WaterMark";
+import { mapState, mapActions } from "vuex";
 export default {
   components: {
     Footer,
@@ -56,32 +57,25 @@ export default {
   },
   data() {
     return {
-      selectedCategory: "뉴스큐",
       items: postDic.items,
-      footerTitle: "큐피드",
-      showCategories: false,
-      categories: [
-        {
-          title: "테크뷰",
-          description: "기술관련 아티클"
-        },
-        {
-          title: "인기뷰",
-          description: "가장 많이 본 아티클"
-        },
-        {
-          title: "추천뷰",
-          description: "알면 좋은 아티클"
-        }
-      ]
+      footerTitle: "큐피드"
     };
+  },
+  computed: {
+    ...mapState({
+      selectedCategory: state => state.uiState.selectedCategory,
+      categories: state => state.uiState.categories,
+      showCategories: state => state.uiState.showCategories
+    })
   },
   created() {
     this.selectCategory(this.categories[0]);
   },
   methods: {
-    selectCategory(category) {
-      this.selectedCategory = category;
+    ...mapActions("uiState", ["selectCategory", "openCategoriesPanel"]),
+    handleSelectCategory(category) {
+      this.selectCategory(category);
+      this.openCategoriesPanel();
     },
     enter(el, done) {
       if (process.browser) {
@@ -112,11 +106,7 @@ export default {
       if (process.browser) {
         Velocity(el, "slideUp");
       }
-    },
-    toggleCagetories() {
-      this.showCategories = !this.showCategories;
-    },
-    handleMoreView() {}
+    }
   },
   head() {
     let baseUrl = "https://blog.feruden.com";
