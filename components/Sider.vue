@@ -33,7 +33,6 @@ export default {
   background-color: #fff;
   transform: translateX(100%);
   transition: all 0.25s ease-in-out;
-  padding: 12px;
   &.is-opened {
     transform: translateX(0);
   }
