@@ -8,6 +8,9 @@
           :image="item.image"
           :description="transformDateToMomentDate(item.publishDate)"
           :tags="item.tags"
+          :allowTag="allowTag"
+          :allowRank="allowRank"
+          :mode="mode"
         />
       </nuxt-link>
     </div>
@@ -28,6 +31,18 @@ export default {
       default() {
         return [];
       }
+    },
+    allowRank: {
+      type: Boolean,
+      default: true
+    },
+    allowTag: {
+      type: Boolean,
+      default: true
+    },
+    mode: {
+      type: String,
+      default: "vertical"
     }
   },
   methods: {
