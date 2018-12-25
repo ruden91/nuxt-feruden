@@ -40,6 +40,7 @@
   
 <script>
 import postMixins from "~/helpers/post";
+import { mapState, mapGetters } from "vuex";
 import { palette } from "~/api";
 import sample from "lodash/sample";
 export default {
@@ -56,6 +57,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters("posts", ["filteredPosts"]),
     posts() {
       return this.$store.state.posts.posts;
     }

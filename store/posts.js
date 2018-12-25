@@ -5,6 +5,14 @@ export const state = () => ({
   isLoading: true
 });
 
+export const getters = {
+  filteredPosts(state, getters, rootState) {
+    const { selectedCategory } = rootState;
+    console.log(selectedCategory);
+    return [];
+  }
+};
+
 export const mutations = {
   setPosts(state, payload) {
     state.posts = payload;
