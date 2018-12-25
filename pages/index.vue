@@ -69,12 +69,10 @@ export default {
   },
   computed: {
     ...mapState({
-      selectedCategory: state => state.uiState.selectedCategory
+      selectedCategory: state => state.uiState.selectedCategory,
+      posts: state => state.posts.posts
     }),
-    ...mapGetters("posts", ["filteredPosts"]),
-    posts() {
-      return this.$store.state.posts.posts;
-    }
+    ...mapGetters("posts", ["filteredPosts"])
   },
   created() {
     this.runOnChange();

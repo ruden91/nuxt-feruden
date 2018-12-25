@@ -12,7 +12,7 @@
         </div>
         <div class="feruden__header-nav-right-holder">
           <div v-if="showCategories">
-            <Button iconType="search"/>
+            <Button iconType="search" @click="handleSider"/>
             <Button iconType="settings"/>
           </div>
           <div v-else>
@@ -49,6 +49,29 @@
         <p>{{ footerTitle }}</p>
       </footer>
     </transition>
+    <Sider :open="siderState">
+      <div slot="header">
+        <button @click="handleSider">click</button>
+      </div>
+      <div slot="content" class="feruden__sider-content">
+        <Search @changeKeyword="changeKeyword"/>
+        <template v-if="keyword === ''">
+          <p>회원님을 위한 추천 키워드</p>
+        </template>
+        <template v-else>
+          <h3>'{{ keyword }}'에 대한 검색 결과({{ postsWithKeyword.length }})</h3>
+        </template>
+        <div class="feruden__sider-result">
+          <CardHolder
+            v-if="keyword !== ''"
+            :items="postsWithKeyword"
+            mode="horizontal"
+            :allowTag="false"
+            :allowRank="false"
+          />
+        </div>
+      </div>
+    </Sider>
   </div>
 </template>
 <script>
@@ -59,18 +82,26 @@ if (process.browser) {
 import Footer from "~/components/Footer";
 import postDic from "~/static/postDic.json";
 import WaterMark from "~/components/WaterMark";
+import Sider from "~/components/Sider";
+import Search from "~/components/Search";
+import CardHolder from "~/components/postViewer/CardHolder";
 import Button from "~/components/buttons/Button";
 import { mapState, mapActions } from "vuex";
 export default {
   components: {
     Footer,
     WaterMark,
-    Button
+    Button,
+    Sider,
+    Search,
+    CardHolder
   },
   data() {
     return {
       items: postDic.items,
-      footerTitle: "큐피드"
+      footerTitle: "큐피드",
+      siderState: false,
+      keyword: ""
     };
   },
   computed: {
@@ -78,8 +109,16 @@ export default {
       selectedCategory: state => state.uiState.selectedCategory,
       categories: state => state.uiState.categories,
       showCategories: state => state.uiState.showCategories,
-      initialApp: state => state.uiState.initialApp
-    })
+      initialApp: state => state.uiState.initialApp,
+      posts: state => state.posts.posts
+    }),
+    postsWithKeyword() {
+      return this.posts.filter(
+        post =>
+          post.title.includes(this.keyword) ||
+          post.description.includes(this.keyword)
+      );
+    }
   },
   created() {
     if (this.initialApp) {
@@ -93,6 +132,12 @@ export default {
       "openCategoriesPanel",
       "initApp"
     ]),
+    changeKeyword(keyword) {
+      this.keyword = keyword;
+    },
+    handleSider() {
+      this.siderState = !this.siderState;
+    },
     handleSelectCategory(category) {
       this.selectCategory(category);
       this.openCategoriesPanel();
@@ -256,6 +301,37 @@ export default {
       background-color: transparent;
       padding: 10px;
       margin-right: 5px;
+    }
+  }
+  @include e("sider-result") {
+    height: 80vh;
+    overflow: auto;
+  }
+  @include e("sider-content") {
+    p,
+    h3 {
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+    h3 {
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+}
+</style>
+<style lang="scss">
+.feruden {
+  @include e("sider-result") {
+    margin: 0 -12px;
+    .card-holder {
+      display: block;
+      margin-top: 10px;
+      background-color: #f7f7f7;
+      padding-top: 0 !important;
+    }
+    .card-holder__item-holder {
+      padding: 0;
     }
   }
 }
