@@ -37,7 +37,7 @@
         </div>
       </div>
     </template>
-    <template>
+    <template v-else>
       <div class="feruden-main__card-bg">
         <CardHolder :items="posts"/>
       </div>

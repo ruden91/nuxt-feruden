@@ -106,6 +106,7 @@ module.exports = {
     { src: "~/plugins/vuetouch", ssr: false }
   ],
   modules: [
+    "nuxt-device-detect",
     "@nuxtjs/component-cache",
     "@nuxtjs/dotenv",
     "@nuxtjs/markdownit",

@@ -65,14 +65,22 @@ export default {
     ...mapState({
       selectedCategory: state => state.uiState.selectedCategory,
       categories: state => state.uiState.categories,
-      showCategories: state => state.uiState.showCategories
+      showCategories: state => state.uiState.showCategories,
+      initialApp: state => state.uiState.initialApp
     })
   },
   created() {
-    this.selectCategory(this.categories[0]);
+    if (this.initialApp) {
+      this.selectCategory(this.categories[0]);
+      this.initApp();
+    }
   },
   methods: {
-    ...mapActions("uiState", ["selectCategory", "openCategoriesPanel"]),
+    ...mapActions("uiState", [
+      "selectCategory",
+      "openCategoriesPanel",
+      "initApp"
+    ]),
     handleSelectCategory(category) {
       this.selectCategory(category);
       this.openCategoriesPanel();

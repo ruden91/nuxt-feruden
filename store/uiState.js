@@ -19,7 +19,8 @@ const categories = [
 export const state = () => ({
   selectedCategory: "",
   showCategories: false,
-  categories
+  categories,
+  initialApp: true
 });
 
 export const mutations = {
@@ -28,6 +29,9 @@ export const mutations = {
   },
   OPEN_CATEGORIES(state) {
     state.showCategories = !state.showCategories;
+  },
+  INIT_APP(state) {
+    state.initialApp = false;
   }
 };
 
@@ -37,5 +41,8 @@ export const actions = {
   },
   openCategoriesPanel({ commit }) {
     commit("OPEN_CATEGORIES");
+  },
+  initApp({ commit }) {
+    commit("INIT_APP");
   }
 };
