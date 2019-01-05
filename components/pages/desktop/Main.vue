@@ -40,7 +40,7 @@
         </div>
       </section>
     </section>
-    <section class="main__right-side-holder">main__right-side-holder</section>
+    <section class="main__right-side-holder"></section>
   </section>
 </template>
 <script>
@@ -56,9 +56,6 @@ export default {
     restPosts() {
       return this.posts.slice(1);
     }
-  },
-  mounted() {
-    console.log(this.featuredPost);
   }
 };
 </script>
