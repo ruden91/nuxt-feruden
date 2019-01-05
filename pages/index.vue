@@ -1,86 +1,24 @@
 <template>
   <section class="feruden-main">
-    <template v-if="selectedCategory.type === 'tech'">
-      <div v-swiper:mySwiper="swiperOption" @slideChange="runOnChange">
-        <div class="feruden-main__swiper-holder-line">
-          <div class="feruden-main__swiper-holder-line-inner">
-            <span
-              class="feruden-main__swiper-holder-line-highlight"
-              :style="{'background-image': selectedPallete.gradient }"
-            />
-          </div>
-        </div>
-        <div class="swiper-wrapper feruden-main__swiper-wrapper">
-          <div
-            class="swiper-slide feruden-main__swiper-slide"
-            v-for="(post, index) in posts"
-            :key="post.id"
-          >
-            <nuxt-link :to="`/blog/${post.slug}`">
-              <div class="feruden-main__swiper-slide-backdrop">
-                <img :src="post.image" :alt="post.title">
-              </div>
-              <div class="feruden-main__swiper-slide-content">
-                <div>
-                  <div class="feruden-main__swiper-slide-content-inner-img-wrapper">
-                    <img :src="post.image" :alt="post.title">
-                  </div>
-                  <div class="feruden-main__swiper-slide-inner-content">
-                    <p :style="{color: selectedPallete.color }">{{ ++index }}</p>
-                    <h2 :style="{color: selectedPallete.color }">{{post.title}}</h2>
-                    <time>{{transformDateToMomentDate(post.publishDate)}}</time>
-                  </div>
-                </div>
-              </div>
-            </nuxt-link>
-          </div>
-        </div>
-      </div>
+    <template v-if="$device.isMobile">
+      <MobileMain/>
     </template>
     <template v-else>
-      <div class="feruden-main__card-bg">
-        <CardHolder :items="posts"/>
-      </div>
+      <DesktopMain/>
     </template>
   </section>
 </template>
   
 <script>
-import postMixins from "~/helpers/post";
-import { mapState, mapGetters } from "vuex";
-import { palette } from "~/api";
-import sample from "lodash/sample";
-import CardHolder from "~/components/postViewer/CardHolder";
+import DesktopMain from "@/components/pages/desktop/Main";
+import MobileMain from "@/components/pages/mobile/Main";
 export default {
-  mixins: [postMixins],
+  layout: ctx => {
+    return ctx.isMobile ? "mobileDefault" : "desktopDefault";
+  },
   components: {
-    CardHolder
-  },
-  data() {
-    return {
-      palette,
-      selectedPallete: {},
-      swiperOption: {
-        loop: true,
-        slidesPerView: "auto",
-        centeredSlides: true
-      }
-    };
-  },
-  computed: {
-    ...mapState({
-      selectedCategory: state => state.uiState.selectedCategory,
-      posts: state => state.posts.posts
-    }),
-    ...mapGetters("posts", ["filteredPosts"])
-  },
-  created() {
-    this.runOnChange();
-  },
-  methods: {
-    runOnChange() {
-      this.selectedPallete = sample(this.palette);
-    }
+    DesktopMain,
+    MobileMain
   },
   async fetch({ store, params }) {
     await store.dispatch("posts/getPosts", params);

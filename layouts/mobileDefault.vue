@@ -82,7 +82,7 @@ let Velocity;
 if (process.browser) {
   Velocity = require("velocity-animate");
 }
-import Footer from "~/components/Footer";
+import Footer from "~/components/layouts/Footer";
 import postDic from "~/static/postDic.json";
 import WaterMark from "~/components/WaterMark";
 import Sider from "~/components/Sider";

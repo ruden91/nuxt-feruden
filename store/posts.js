@@ -32,7 +32,6 @@ export const actions = {
       content_type: "blogPost",
       order: "-sys.createdAt"
     });
-
     if (res.items.length > 0) {
       const data = res.items.map(item => refineContentfulPost(item));
       commit("setPosts", data);
