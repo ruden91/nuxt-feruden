@@ -5,11 +5,12 @@
     <time class="feruden__blog-time">{{ transformDateToMomentDate(currentPost.sys.createdAt) }}</time>
     <div class="feruden__blog-md-content" v-html="$md.render(currentPost.fields.body)"></div>
     <no-ssr>
-      <vue-disqus
+      <div class="fb-comments" :data-href="postURL" data-numposts="5"></div>
+      <!-- <vue-disqus
         :shortname="shortname"
         :identifier="currentPost.sys.id"
         :url="`${baseUrl}/blog/${currentPost.fields.slug}`"
-      ></vue-disqus>
+      ></vue-disqus>-->
     </no-ssr>
   </section>
 </template>
@@ -21,6 +22,7 @@ import client from "~/plugins/contentful";
 import postMixins from "~/helpers/post";
 import Tag from "~/components/Tag";
 import { setBlogSEO } from "~/helpers/seo";
+import meta from "~/static/meta.json";
 export default {
   layout: ctx => {
     return ctx.isMobile ? "mobile/blog" : "desktop/blog";
@@ -38,6 +40,10 @@ export default {
     };
   },
   computed: {
+    postURL() {
+      const { slug } = this.currentPost.fields;
+      return `${meta.baseURL}/blog/${slug}`;
+    },
     currentPost() {
       return this.$store.state.posts.currentPost;
     },

@@ -31,6 +31,11 @@ module.exports = {
         content: "https://blog.feruden.com/main2.png"
       }
     ],
+    script: [
+      {
+        src: "/js/fb-sdk.js"
+      }
+    ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
