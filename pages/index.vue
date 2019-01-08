@@ -14,7 +14,7 @@ import DesktopMain from "@/components/pages/desktop/Main";
 import MobileMain from "@/components/pages/mobile/Main";
 export default {
   layout: ctx => {
-    return ctx.isMobile ? "mobileDefault" : "desktopDefault";
+    return ctx.isMobile ? "mobile/default" : "desktop/default";
   },
   components: {
     DesktopMain,
