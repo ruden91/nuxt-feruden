@@ -102,6 +102,7 @@ module.exports = {
     }
   },
   plugins: [
+    { src: "~plugins/vue-affix.js", ssr: false },
     "~/plugins/directives.js",
     "~/plugins/contentful",
     { src: "~plugins/ga.js", ssr: false },

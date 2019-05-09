@@ -24,6 +24,8 @@ export default {
 
 <style lang="scss" scoped>
 .navigation {
+  padding-top: 25px;
+  padding-bottom: 20px;
   ul {
     li {
       display: inline-block;

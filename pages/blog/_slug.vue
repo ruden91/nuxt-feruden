@@ -24,9 +24,6 @@ import Tag from "~/components/Tag";
 import { setBlogSEO } from "~/helpers/seo";
 import meta from "~/static/meta.json";
 export default {
-  layout: ctx => {
-    return ctx.isMobile ? "mobile/blog" : "desktop/blog";
-  },
   mixins: [postMixins],
   scrollToTop: true,
   components: {

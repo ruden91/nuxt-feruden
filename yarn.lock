@@ -7114,6 +7114,10 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-affix@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/vue-affix/-/vue-affix-0.5.2.tgz#1f22f36262e3b867788adb00ae5bc3c3d12ea64b"
+
 vue-awesome-swiper@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/vue-awesome-swiper/-/vue-awesome-swiper-3.1.3.tgz#05500b501ffb3fec9bf7eb9985bcf4ae8360ed9e"

@@ -105,6 +105,7 @@ export default {
       console.error(err);
     }
   },
+  scrollToTop: true,
   components: {
     Navigation
   },
@@ -118,31 +119,16 @@ export default {
 
 <style lang="scss" scoped>
 .feruden-main {
-  @include e("navigation-container") {
-    padding-top: 25px;
-    padding-bottom: 20px;
-    padding-left: 16px;
-    padding-right: 16px;
-    width: 100%;
-    max-width: 1208px;
-    margin: 0 auto;
-  }
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+  max-width: 1208px;
+  margin: 0 auto;
   @include e("front-container") {
     @include clearfix;
-    padding-top: 20px;
-    padding-left: 16px;
-    padding-right: 16px;
-    width: 100%;
-    max-width: 1208px;
-    margin: 0 auto;
   }
   @include e("category-container") {
     @include clearfix;
-    width: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
-    max-width: 1208px;
-    margin: 0 auto;
   }
   @include e("front-article-container") {
     &:nth-of-type(1) {
