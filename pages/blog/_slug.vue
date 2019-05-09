@@ -104,11 +104,12 @@ export default {
 <style lang="scss" scoped>
 .feruden {
   @include e("blog") {
-    max-width: 740px;
+    max-width: 1082px;
     margin: 0 auto;
-    margin-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-top: 25px;
+    padding-bottom: 50px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 </style>
