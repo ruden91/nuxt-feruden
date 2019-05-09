@@ -5,20 +5,24 @@
     </header>
     <div>
       <article class="feruden-category__main-article">
-        <div>
-          <img :src="items[0].image" :alt="items[0].title">
-          <h3>{{ items[0].title }}</h3>
-          <p>{{ items[0].description }}</p>
-        </div>
+        <nuxt-link :to="`/blog/${items[0].slug}`">
+          <div>
+            <img :src="items[0].image" :alt="items[0].title">
+            <h3>{{ items[0].title }}</h3>
+            <p>{{ items[0].description }}</p>
+          </div>
+        </nuxt-link>
       </article>
     </div>
     <div class="feruden-category__article-list">
       <article class="feruden-category__article" v-for="item in items.slice(1)" :key="item.id">
-        <img :src="item.image" :alt="item.title">
-        <div>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.description }}</p>
-        </div>
+        <nuxt-link :to="`/blog/${item.slug}`">
+          <img :src="item.image" :alt="item.title">
+          <div>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </div>
+        </nuxt-link>
       </article>
     </div>
   </section>
