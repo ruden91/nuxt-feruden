@@ -69,25 +69,25 @@ export default {
     h4,
     h5,
     h6 {
-      font-weight: 600;
-      margin: 0.67em 0;
+      font-weight: 600 !important;
+      margin: 0.67em 0 !important;
     }
     h1 {
-      font-size: 1.6em;
+      font-size: 1.6em !important;
     }
     h2 {
-      font-size: 1.5em;
+      font-size: 1.5em !important;
     }
     h3 {
-      font-size: 1.17em;
+      font-size: 1.17em !important;
     }
     h4 {
     }
     h5 {
-      font-size: 0.83em;
+      font-size: 0.83em !important;
     }
     h6 {
-      font-size: 0.67em;
+      font-size: 0.67em !important;
     }
   }
 
