@@ -31,6 +31,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+$list: "settings", "notification", "user", "search";
+.iconBgSize {
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  padding: 10px;
+  background-size: contain;
+}
 .feruden {
   @include e("icon") {
     display: inline-block;
@@ -54,6 +61,12 @@ export default {
       }
       &:after {
         transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+    @each $item in $list {
+      @include m(#{$item}) {
+        @extend .iconBgSize;
+        background-image: url("~assets/images/#{$item}.png");
       }
     }
   }

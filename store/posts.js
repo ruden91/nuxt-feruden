@@ -1,9 +1,18 @@
 import client from "~/plugins/contentful";
+import { refineContentfulPost } from "~/utils/helpers";
+
 export const state = () => ({
   posts: [],
   currentPost: {},
   isLoading: true
 });
+
+export const getters = {
+  filteredPosts(state, getters, rootState) {
+    const { selectedCategory } = rootState;
+    return [];
+  }
+};
 
 export const mutations = {
   setPosts(state, payload) {
@@ -23,9 +32,9 @@ export const actions = {
       content_type: "blogPost",
       order: "-sys.createdAt"
     });
-
     if (res.items.length > 0) {
-      commit("setPosts", res.items);
+      const data = res.items.map(item => refineContentfulPost(item));
+      commit("setPosts", data);
     }
   },
   async getPostBySlug({ commit }, slug) {

@@ -31,6 +31,11 @@ module.exports = {
         content: "https://blog.feruden.com/main2.png"
       }
     ],
+    script: [
+      {
+        src: "/js/fb-sdk.js"
+      }
+    ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
@@ -97,6 +102,7 @@ module.exports = {
     }
   },
   plugins: [
+    "~/plugins/directives.js",
     "~/plugins/contentful",
     { src: "~plugins/ga.js", ssr: false },
     "~/plugins/disqus",
@@ -106,6 +112,7 @@ module.exports = {
     { src: "~/plugins/vuetouch", ssr: false }
   ],
   modules: [
+    "nuxt-device-detect",
     "@nuxtjs/component-cache",
     "@nuxtjs/dotenv",
     "@nuxtjs/markdownit",

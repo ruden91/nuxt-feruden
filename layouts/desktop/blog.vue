@@ -6,7 +6,6 @@
     <section class="feruden__content">
       <nuxt/>
     </section>
-    <Footer/>
   </div>
 </template>
 <script>
@@ -16,7 +15,6 @@ import Footer from "@/components/layouts/Footer";
 export default {
   components: {
     Header,
-    Footer,
     Logo
   }
 };
