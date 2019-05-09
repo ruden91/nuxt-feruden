@@ -1,5 +1,8 @@
 <template>
   <div class="feruden-main">
+    <div class="feruden-main__navigation-container">
+      <Navigation :items="navigation"/>
+    </div>
     <section class="feruden-main__front-container">
       <div class="feruden-main__front-article-container">
         <article class="feruden-main__front-article">
@@ -63,6 +66,7 @@
 </template>
 
 <script>
+import Navigation from "@/components/Navigation";
 import client from "~/plugins/contentful";
 import { refineContentfulPost } from "~/utils/helpers";
 import uniq from "lodash/uniq";
@@ -72,6 +76,7 @@ export default {
       let items = [];
       let categoryItems = {};
       let categories = [];
+      let navigation = [];
       const res = await client.getEntries({
         content_type: "blogPost",
         order: "-sys.createdAt"
@@ -88,8 +93,10 @@ export default {
         categoryItems[v] = items.filter(o => o.categories[0] === v);
       });
 
+      navigation = categories.map(v => ({ name: v, link: `/categories/${v}` }));
       return {
         latestItems: items.slice(0, 5),
+        navigation,
         categoryItems,
         categories,
         items
@@ -97,6 +104,9 @@ export default {
     } catch (err) {
       console.error(err);
     }
+  },
+  components: {
+    Navigation
   },
   methods: {
     capitalize(str) {
@@ -108,6 +118,15 @@ export default {
 
 <style lang="scss" scoped>
 .feruden-main {
+  @include e("navigation-container") {
+    padding-top: 25px;
+    padding-bottom: 20px;
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 100%;
+    max-width: 1208px;
+    margin: 0 auto;
+  }
   @include e("front-container") {
     @include clearfix;
     padding-top: 20px;
