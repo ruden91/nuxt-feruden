@@ -45,27 +45,31 @@
       </div>
     </section>
     <div class="feruden-main__category-container">
-      <section
-        class="feruden-main__category-section"
-        v-for="(value, key) in categoryItems"
-        :key="key"
-      >
-        <header>
-          <h3>{{ capitalize(key) }}</h3>
-        </header>
-        <div>
-          <article v-for="item in value" :key="item.id">
-            <nuxt-link :to="`/blog/${item.slug}`">
-              <div>
-                <img :src="item.image" :alt="item.title">
-                <h3>{{ item.title }}</h3>
-                <p>{{ item.description }}</p>
-              </div>
-            </nuxt-link>
-          </article>
-        </div>
-      </section>
-      <aside class="feruden-main__aside"></aside>
+      <div class="feruden-main__category-section-container">
+        <section
+          class="feruden-main__category-section"
+          v-for="(value, key) in categoryItems"
+          :key="key"
+        >
+          <header>
+            <h3>{{ capitalize(key) }}</h3>
+          </header>
+          <div>
+            <article v-for="item in value" :key="item.id">
+              <nuxt-link :to="`/blog/${item.slug}`">
+                <div>
+                  <img :src="item.image" :alt="item.title">
+                  <h3>{{ item.title }}</h3>
+                  <p>{{ item.description }}</p>
+                </div>
+              </nuxt-link>
+            </article>
+          </div>
+        </section>
+      </div>
+      <aside class="feruden-main__aside" v-sticky :sticky-offset="{ top: 100 }" sticky-side="top">
+        <h2>Popular on V{IE}W</h2>
+      </aside>
     </div>
   </div>
 </template>
@@ -136,6 +140,10 @@ export default {
     @include clearfix;
   }
 
+  @include e("category-section-container") {
+    float: left;
+    width: 740px;
+  }
   @include e("navigation-container") {
     &.top-sticky {
       width: 100% !important;
@@ -230,11 +238,9 @@ export default {
   }
   @include e("aside") {
     float: left;
-    width: calc(100% - 680px);
+    width: calc(100% - 740px);
   }
   @include e("category-section") {
-    float: left;
-    width: 680px;
     header {
       margin-bottom: 25px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.15);
