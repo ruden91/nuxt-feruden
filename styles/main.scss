@@ -93,6 +93,10 @@ video {
   vertical-align: baseline;
 }
 
+ul,
+ol {
+  list-style: none;
+}
 body {
   font-family: $font-face;
   font-size: 14px;

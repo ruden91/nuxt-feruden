@@ -95,7 +95,7 @@ module.exports = {
     }
   },
   plugins: [
-    { src: "~plugins/vue-affix.js", ssr: false },
+    { src: "~plugins/vue-sticky-directive.js", ssr: false },
     "~/plugins/directives.js",
     "~/plugins/contentful",
     { src: "~plugins/ga.js", ssr: false },

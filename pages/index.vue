@@ -1,6 +1,11 @@
 <template>
   <div class="feruden-main">
-    <div class="feruden-main__navigation-container">
+    <div
+      class="feruden-main__navigation-container"
+      v-sticky
+      sticky-offset="offset"
+      sticky-side="top"
+    >
       <Navigation :items="navigation"/>
     </div>
     <section class="feruden-main__front-container">
@@ -130,6 +135,21 @@ export default {
   @include e("category-container") {
     @include clearfix;
   }
+
+  @include e("navigation-container") {
+    &.top-sticky {
+      width: 100% !important;
+      left: 0 !important;
+      background-color: #fff;
+      box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.15);
+      padding-left: 32px;
+      .navigation {
+        width: 1208px;
+        margin: 0 auto;
+      }
+    }
+  }
+
   @include e("front-article-container") {
     &:nth-of-type(1) {
       float: left;
