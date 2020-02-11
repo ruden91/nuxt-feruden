@@ -9,6 +9,26 @@
   status = 301
   
 [[redirects]]
+  from = "/blog/copy-folder-in-linux"
+  to = "https://webruden.tistory.com/125"
+  status = 301
+
+[[redirects]]
+  from = "/blog/javascript-async-programming-callback-function"
+  to = "https://webruden.tistory.com/126"
+  status = 301
+
+[[redirects]]
+  from = "/blog/prime-number-in-javascript"
+  to = "https://webruden.tistory.com/127"
+  status = 301
+  
+[[redirects]]
   from = "/blog/deploy-vue-app-to-aws-s3"
+  to = "https://webruden.tistory.com/115"
+  status = 301
+
+[[redirects]]
+  from = "/tags"
   to = "https://webruden.tistory.com/115"
   status = 301
