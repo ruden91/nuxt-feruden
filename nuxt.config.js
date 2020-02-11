@@ -113,6 +113,9 @@ module.exports = {
     { src: "~/plugins/vuetouch", ssr: false }
   ],
   modules: [
+    ['@nuxtjs/redirect-module', {
+      // Redirect option here
+    }],    
     "nuxt-device-detect",
     "@nuxtjs/component-cache",
     "@nuxtjs/dotenv",
@@ -165,5 +168,8 @@ module.exports = {
 
       return [...blogPosts, ...tagsPosts];
     }
-  }
+  },
+  redirect: [
+    { from: '/blog/vue-js-event-bus-event-bus-in-vue-js', to: 'https://webruden.tistory.com/109', statusCode: 301 }
+  ]  
 };
