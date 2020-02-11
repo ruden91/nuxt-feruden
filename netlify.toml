@@ -2,3 +2,8 @@
   from = "/blog/vue-js-event-bus-event-bus-in-vue-js"
   to = "https://webruden.tistory.com/109"
   status = 301
+  
+[[redirects]]
+  from = "/blog/deploy-vue-app-to-aws-s3"
+  to = "https://webruden.tistory.com/115"
+  status = 301
