@@ -9,6 +9,11 @@
   status = 301
   
 [[redirects]]
+  from = "/blog/clear-gitignore-cache"
+  to = "https://webruden.tistory.com/134"
+  status = 301
+
+[[redirects]]
   from = "/blog/copy-folder-in-linux"
   to = "https://webruden.tistory.com/125"
   status = 301
