@@ -22,6 +22,10 @@
   from = "/blog/javascript-async-programming-callback-function"
   to = "https://webruden.tistory.com/126"
   status = 301
+[[redirects]]
+  from = "/blog/nuxt-js-x-contentful-x-netlify-static-blog-1"
+  to = "https://webruden.tistory.com/112"
+  status = 301
 
 [[redirects]]
   from = "/blog/prime-number-in-javascript"
@@ -36,4 +40,14 @@
 [[redirects]]
   from = "/tags"
   to = "https://webruden.tistory.com/tags"
+  status = 301
+
+[[redirects]]
+  from = "/blog/javascript-hoisting"
+  to = "https://webruden.tistory.com/137"
+  status = 301
+
+[[redirects]]
+  from = "/blog/mac-kill-port"
+  to = "https://webruden.tistory.com/108"
   status = 301
