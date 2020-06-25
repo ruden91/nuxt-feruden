@@ -22,6 +22,16 @@
   from = "/blog/prime-number-in-javascript"
   to = "https://webruden.tistory.com/127"
   status = 301
+
+[[redirects]]
+  from = "/blog/fibonacci-in-javascript"
+  to = "https://webruden.tistory.com/203"
+  status = 301
+  
+[[redirects]]
+  from = "/blog/inline-vs-block-vs-inline-block"
+  to = "https://webruden.tistory.com/135"
+  status = 301
   
 [[redirects]]
   from = "/blog/deploy-vue-app-to-aws-s3"
